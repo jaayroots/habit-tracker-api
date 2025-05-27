@@ -14,6 +14,7 @@ func (s *echoServer) initRoute() {
 	s.healthRouter()
 	s.authRouter(authorizingMiddleware)
 	s.usersRouter(authorizingMiddleware)
+	s.habitRouter(authorizingMiddleware)
 }
 
 func (s *echoServer) getAuthorizingMiddleware() *authorizingMiddleware {

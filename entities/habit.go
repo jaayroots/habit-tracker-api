@@ -11,6 +11,7 @@ type Habit struct {
 	ID          uint            `gorm:"primaryKey"`
 	UserID      uint            `gorm:"not null"`
 	Title       string          `gorm:"type:varchar(255);not null"`
+	Description string          `gorm:"type:text"`
 	Frequency   enums.Frequency `gorm:"type:int;default:1;not null"`
 	TargetCount uint            `gorm:"not null"`
 
