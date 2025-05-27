@@ -3,16 +3,16 @@ package service
 import (
 	"time"
 
-	"github.com/jaayroots/go_base/config"
-	_authException "github.com/jaayroots/go_base/pkg/auth/exception"
-	_authMapper "github.com/jaayroots/go_base/pkg/auth/mapper"
-	_authModel "github.com/jaayroots/go_base/pkg/auth/model"
-	_authRepository "github.com/jaayroots/go_base/pkg/auth/repository"
-	_utils "github.com/jaayroots/go_base/pkg/auth/utils"
-	_userException "github.com/jaayroots/go_base/pkg/user/exception"
-	_userMapper "github.com/jaayroots/go_base/pkg/user/mapper"
-	_userModel "github.com/jaayroots/go_base/pkg/user/model"
-	_userRepository "github.com/jaayroots/go_base/pkg/user/repository"
+	"github.com/jaayroots/habit-tracker-api/config"
+	_authException "github.com/jaayroots/habit-tracker-api/pkg/auth/exception"
+	_authMapper "github.com/jaayroots/habit-tracker-api/pkg/auth/mapper"
+	_authModel "github.com/jaayroots/habit-tracker-api/pkg/auth/model"
+	_authRepository "github.com/jaayroots/habit-tracker-api/pkg/auth/repository"
+	_utils "github.com/jaayroots/habit-tracker-api/pkg/auth/utils"
+	_userException "github.com/jaayroots/habit-tracker-api/pkg/user/exception"
+	_userMapper "github.com/jaayroots/habit-tracker-api/pkg/user/mapper"
+	_userModel "github.com/jaayroots/habit-tracker-api/pkg/user/model"
+	_userRepository "github.com/jaayroots/habit-tracker-api/pkg/user/repository"
 )
 
 type authServiceImpl struct {

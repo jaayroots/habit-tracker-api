@@ -1,10 +1,10 @@
 package server
 
 import (
-	_authController "github.com/jaayroots/go_base/pkg/auth/controller"
-	_authRepository "github.com/jaayroots/go_base/pkg/auth/repository"
-	_authService "github.com/jaayroots/go_base/pkg/auth/service"
-	_userRepository "github.com/jaayroots/go_base/pkg/user/repository"
+	_authController "github.com/jaayroots/habit-tracker-api/pkg/auth/controller"
+	_authRepository "github.com/jaayroots/habit-tracker-api/pkg/auth/repository"
+	_authService "github.com/jaayroots/habit-tracker-api/pkg/auth/service"
+	_userRepository "github.com/jaayroots/habit-tracker-api/pkg/user/repository"
 )
 
 func (s *echoServer) initRoute() {

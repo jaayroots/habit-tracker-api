@@ -1,6 +1,6 @@
 package repository
 
-import "github.com/jaayroots/go_base/entities"
+import "github.com/jaayroots/habit-tracker-api/entities"
 
 type SessionRepository interface {
 	Create(session *entities.Session) (*entities.Session, error)

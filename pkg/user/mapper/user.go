@@ -1,9 +1,9 @@
 package mapper
 
 import (
-	"github.com/jaayroots/go_base/entities"
-	_authUtils "github.com/jaayroots/go_base/pkg/auth/utils"
-	_userModel "github.com/jaayroots/go_base/pkg/user/model"
+	"github.com/jaayroots/habit-tracker-api/entities"
+	_authUtils "github.com/jaayroots/habit-tracker-api/pkg/auth/utils"
+	_userModel "github.com/jaayroots/habit-tracker-api/pkg/user/model"
 )
 
 func ToUserEntity(userReq *_userModel.UserReq) (*entities.User, error) {
@@ -17,7 +17,6 @@ func ToUserEntity(userReq *_userModel.UserReq) (*entities.User, error) {
 		Password:  string(hashedPassword),
 		FirstName: userReq.FirstName,
 		LastName:  userReq.LastName,
-		Avatar:    userReq.Avatar,
 	}
 
 	return userEntity, nil
@@ -29,7 +28,6 @@ func ToUserUpdateEntity(userReq *_userModel.UserUpdateReq) (*entities.User, erro
 		Email:     userReq.Email,
 		FirstName: userReq.FirstName,
 		LastName:  userReq.LastName,
-		Avatar:    userReq.Avatar,
 	}
 
 	return userEntity, nil
@@ -42,6 +40,5 @@ func ToUserRes(user *entities.User) *_userModel.UserRes {
 		Email:     user.Email,
 		FirstName: user.FirstName,
 		LastName:  user.LastName,
-		Avatar:    user.Avatar,
 	}
 }

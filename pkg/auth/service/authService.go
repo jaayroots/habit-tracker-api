@@ -1,8 +1,8 @@
 package service
 
 import (
-	_authModel "github.com/jaayroots/go_base/pkg/auth/model"
-	_userModel "github.com/jaayroots/go_base/pkg/user/model"
+	_authModel "github.com/jaayroots/habit-tracker-api/pkg/auth/model"
+	_userModel "github.com/jaayroots/habit-tracker-api/pkg/user/model"
 )
 
 type AuthService interface {

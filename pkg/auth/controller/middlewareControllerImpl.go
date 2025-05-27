@@ -5,13 +5,13 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/jaayroots/go_base/pctxkeys"
-	"github.com/jaayroots/go_base/pkg/custom"
-	"github.com/jaayroots/go_base/utils"
+	"github.com/jaayroots/habit-tracker-api/pctxkeys"
+	"github.com/jaayroots/habit-tracker-api/pkg/custom"
+	"github.com/jaayroots/habit-tracker-api/utils"
 
 	"github.com/labstack/echo/v4"
 
-	_authService "github.com/jaayroots/go_base/pkg/auth/service"
+	_authService "github.com/jaayroots/habit-tracker-api/pkg/auth/service"
 )
 
 type middlewareContollerImpl struct {

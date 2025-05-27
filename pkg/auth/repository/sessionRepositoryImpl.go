@@ -3,12 +3,12 @@ package repository
 import (
 	"errors"
 
-	databases "github.com/jaayroots/go_base/database"
-	"github.com/jaayroots/go_base/entities"
+	databases "github.com/jaayroots/habit-tracker-api/database"
+	"github.com/jaayroots/habit-tracker-api/entities"
 	"github.com/labstack/echo/v4"
 	"gorm.io/gorm"
 
-	_authException "github.com/jaayroots/go_base/pkg/auth/exception"
+	_authException "github.com/jaayroots/habit-tracker-api/pkg/auth/exception"
 )
 
 type sessionRepositoryImpl struct {

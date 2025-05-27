@@ -1,10 +1,10 @@
 package service
 
 import (
-	_userException "github.com/jaayroots/go_base/pkg/user/exception"
-	_userMapper "github.com/jaayroots/go_base/pkg/user/mapper"
-	_userModel "github.com/jaayroots/go_base/pkg/user/model"
-	_userRepository "github.com/jaayroots/go_base/pkg/user/repository"
+	_userException "github.com/jaayroots/habit-tracker-api/pkg/user/exception"
+	_userMapper "github.com/jaayroots/habit-tracker-api/pkg/user/mapper"
+	_userModel "github.com/jaayroots/habit-tracker-api/pkg/user/model"
+	_userRepository "github.com/jaayroots/habit-tracker-api/pkg/user/repository"
 )
 
 type userServiceImpl struct {

@@ -6,8 +6,8 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/bcrypt"
 
-	"github.com/jaayroots/go_base/config"
-	_authException "github.com/jaayroots/go_base/pkg/auth/exception"
+	"github.com/jaayroots/habit-tracker-api/config"
+	_authException "github.com/jaayroots/habit-tracker-api/pkg/auth/exception"
 )
 
 func CheckPasswordHash(password, hash string) bool {

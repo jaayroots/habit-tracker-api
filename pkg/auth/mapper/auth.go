@@ -3,9 +3,9 @@ package mapper
 import (
 	"time"
 
-	"github.com/jaayroots/go_base/entities"
-	_authModel "github.com/jaayroots/go_base/pkg/auth/model"
-	_userModel "github.com/jaayroots/go_base/pkg/user/model"
+	"github.com/jaayroots/habit-tracker-api/entities"
+	_authModel "github.com/jaayroots/habit-tracker-api/pkg/auth/model"
+	_userModel "github.com/jaayroots/habit-tracker-api/pkg/user/model"
 )
 
 func ToAuthRes(user *entities.User, token string) *_authModel.LoginRes {
@@ -17,7 +17,6 @@ func ToAuthRes(user *entities.User, token string) *_authModel.LoginRes {
 			Email:     user.Email,
 			FirstName: user.FirstName,
 			LastName:  user.LastName,
-			Avatar:    user.Avatar,
 		},
 	}
 }

@@ -10,8 +10,8 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/jaayroots/go_base/config"
-	"github.com/jaayroots/go_base/database"
+	"github.com/jaayroots/habit-tracker-api/config"
+	"github.com/jaayroots/habit-tracker-api/database"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/labstack/gommon/log"

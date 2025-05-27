@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/jaayroots/go_base/config"
-	"github.com/jaayroots/go_base/database"
-	"github.com/jaayroots/go_base/server"
+	"github.com/jaayroots/habit-tracker-api/config"
+	"github.com/jaayroots/habit-tracker-api/database"
+	"github.com/jaayroots/habit-tracker-api/server"
 )
 
 func main() {

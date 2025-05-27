@@ -1,9 +1,9 @@
 package server
 
 import (
-	_userController "github.com/jaayroots/go_base/pkg/user/controller"
-	_userRepository "github.com/jaayroots/go_base/pkg/user/repository"
-	_userService "github.com/jaayroots/go_base/pkg/user/service"
+	_userController "github.com/jaayroots/habit-tracker-api/pkg/user/controller"
+	_userRepository "github.com/jaayroots/habit-tracker-api/pkg/user/repository"
+	_userService "github.com/jaayroots/habit-tracker-api/pkg/user/service"
 )
 
 func (s *echoServer) usersRouter(m *authorizingMiddleware) {

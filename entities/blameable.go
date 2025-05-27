@@ -7,7 +7,7 @@ import (
 
 	"gorm.io/gorm"
 
-	"github.com/jaayroots/go_base/pctxkeys"
+	"github.com/jaayroots/habit-tracker-api/pctxkeys"
 )
 
 func setBlameableFieldsBeforeCreate(tx *gorm.DB, createdBy *uint, updatedBy *uint) error {

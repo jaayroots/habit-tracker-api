@@ -1,6 +1,6 @@
 package repository
 
-import "github.com/jaayroots/go_base/entities"
+import "github.com/jaayroots/habit-tracker-api/entities"
 
 type UserRepository interface {
 	Create(user *entities.User) (*entities.User, error)

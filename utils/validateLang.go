@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"github.com/jaayroots/go_base/config"
+	"github.com/jaayroots/habit-tracker-api/config"
 	"github.com/labstack/echo/v4"
 )
 

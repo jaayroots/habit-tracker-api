@@ -1,7 +1,7 @@
 package server
 
 import (
-	_authController "github.com/jaayroots/go_base/pkg/auth/controller"
+	_authController "github.com/jaayroots/habit-tracker-api/pkg/auth/controller"
 	"github.com/labstack/echo/v4"
 )
 
