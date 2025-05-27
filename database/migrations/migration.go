@@ -15,6 +15,8 @@ func main() {
 
 	userMigration(tx)
 	sessionMigration(tx)
+	habitMigration(tx)
+	checkInMigration(tx)
 
 	tx.Commit()
 	if tx.Error != nil {
@@ -29,4 +31,12 @@ func userMigration(tx *gorm.DB) {
 
 func sessionMigration(tx *gorm.DB) {
 	tx.Migrator().CreateTable(&entities.Session{})
+}
+
+func habitMigration(tx *gorm.DB) {
+	tx.Migrator().CreateTable(&entities.Habit{})
+}
+
+func checkInMigration(tx *gorm.DB) {
+	tx.Migrator().CreateTable(&entities.CheckIn{})
 }
