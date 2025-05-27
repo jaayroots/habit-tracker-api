@@ -60,3 +60,27 @@ func ToHabitRes(habit *entities.Habit, user []*entities.User) *_habitModel.Habit
 		UpdatedBy:   updatedBy,
 	}
 }
+
+
+func ToHabitSearchRes(
+	habitSearchReq *_habitModel.HabitSearchReq,
+	user []*entities.User,
+	habits []*entities.Habit,
+	total int,
+) *_habitModel.HabitSearchRes {
+
+	habitResList := make([]*_habitModel.HabitRes, 0, len(habits))
+	for _, habit := range habits {
+		habitResList = append(habitResList, ToHabitRes(habit, user))
+	}
+
+	_, _, totalPage := _utils.PaginateCalculate(habitSearchReq.Page, habitSearchReq.Limit, total)
+	return &_habitModel.HabitSearchRes{
+		Item: habitResList,
+		Paginate: _habitModel.PaginateResult{
+			Page:      int64(habitSearchReq.Page),
+			TotalPage: int64(totalPage),
+			Total:     int64(total),
+		},
+	}
+}

@@ -17,7 +17,7 @@ type (
 	}
 
 	HabitRes struct {
-		ID          int  `json:"id"`
+		ID          int     `json:"id"`
 		Title       string  `json:"title"`
 		Description string  `json:"description"`
 		Frequency   int     `json:"frequency"`
@@ -26,5 +26,28 @@ type (
 		UpdatedAt   int64   `json:"updated_at"`
 		CreatedBy   *string `json:"created_by"`
 		UpdatedBy   *string `json:"updated_by"`
+	}
+
+	HabitSearchReq struct {
+		Page   int            `json:"page" validate:"required"`
+		Limit  int            `json:"limit" validate:"required"`
+		Filter HabitFilterReq `json:"filter" validate:"required"`
+	}
+
+	HabitFilterReq struct {
+		Title       *string `json:"title"`
+		Description *string `json:"description"`
+		Frequency   *int    `json:"frequency"`
+	}
+
+	HabitSearchRes struct {
+		Item     []*HabitRes    `json:"item"`
+		Paginate PaginateResult `json:"paginate"`
+	}
+
+	PaginateResult struct {
+		Page      int64 `json:"page"`
+		TotalPage int64 `json:"total_page"`
+		Total     int64 `json:"total"`
 	}
 )

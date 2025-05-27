@@ -109,11 +109,28 @@ func (s *habitServiceImpl) Delete(pctx echo.Context, habitID uint) (*_habitModel
 }
 
 func (s *habitServiceImpl) prepareUserBlamable(habitEntity *entities.Habit) ([]*entities.User, error) {
-	userIDArray:= _utils.ExtractAuditUserID(habitEntity)
+	userIDArray := _utils.ExtractAuditUserID(habitEntity)
 	userArr, err := s.userRepository.FindByIDs(userIDArray)
 	if err != nil {
 		return nil, err
 	}
 
 	return userArr, nil
+}
+
+func (s *habitServiceImpl) FindAll(pctx echo.Context, habitSearchReq *_habitModel.HabitSearchReq) (*_habitModel.HabitSearchRes, error) {
+
+	habits, total, err := s.habitRepository.FindAll(pctx, habitSearchReq)
+	if err != nil {
+		return nil, err
+	}
+
+	userIDArray := _utils.ExtractAuditUserIDs(habits)
+	userArr, err := s.userRepository.FindByIDs(userIDArray)
+	if err != nil {
+		return nil, err
+	}
+
+	return _habitMapper.ToHabitSearchRes(habitSearchReq, userArr, habits, total), nil
+
 }

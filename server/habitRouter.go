@@ -20,4 +20,6 @@ func (s *echoServer) habitRouter(m *authorizingMiddleware) {
 	router.GET("/:habitID", habitController.FindByID, m.Authorizing)
 	router.PATCH("/:habitID", habitController.Update, m.Authorizing)
 	router.DELETE("/:habitID", habitController.Delete, m.Authorizing)
+	router.POST("/search", habitController.FindAll, m.Authorizing)
+
 }

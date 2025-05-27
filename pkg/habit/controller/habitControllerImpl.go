@@ -93,3 +93,20 @@ func (c *habitContollerImpl) Delete(pctx echo.Context) error {
 	return custom.Response(pctx, http.StatusOK, nil, "", nil)
 
 }
+
+func (c *habitContollerImpl) FindAll(pctx echo.Context) error {
+
+	habitSearchReq := new(_habitModel.HabitSearchReq)
+	customerEchoRequest := custom.NewCustomEchoRequest(pctx)
+	if err := customerEchoRequest.Build(habitSearchReq); err != nil {
+		return custom.Response(pctx, http.StatusBadRequest, nil, "Invalid request", err)
+	}
+
+	habitSearch, err := c.habitService.FindAll(pctx, habitSearchReq)
+	if err != nil {
+		return custom.Response(pctx, http.StatusBadRequest, nil, err.Error(), nil)
+	}
+
+	return custom.Response(pctx, http.StatusOK, habitSearch, "", nil)
+
+}
