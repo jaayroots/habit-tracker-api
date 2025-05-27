@@ -23,7 +23,7 @@ type Habit struct {
 	UpdatedBy uint  `gorm:"not null"`
 	DeletedBy *uint `gorm:"column:deleted_by"`
 
-	HabitID CheckIn `gorm:"foreignKey:HabitID;references:ID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	HabitID Checkin `gorm:"foreignKey:HabitID;references:ID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
 }
 
 func (t *Habit) GetCreatedBy() uint {

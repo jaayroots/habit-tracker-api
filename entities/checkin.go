@@ -6,7 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type CheckIn struct {
+type Checkin struct {
 	ID      uint `gorm:"primaryKey"`
 	HabitID uint `gorm:"not null"`
 	Date    *time.Time
@@ -20,35 +20,35 @@ type CheckIn struct {
 	DeletedBy *uint `gorm:"column:deleted_by"`
 }
 
-func (t *CheckIn) GetCreatedBy() uint {
+func (t *Checkin) GetCreatedBy() uint {
 	return t.CreatedBy
 }
 
-func (t *CheckIn) GetUpdatedBy() uint {
+func (t *Checkin) GetUpdatedBy() uint {
 	return t.UpdatedBy
 }
 
-func (t *CheckIn) GetDeletedBy() uint {
+func (t *Checkin) GetDeletedBy() uint {
 	if t.DeletedBy != nil {
 		return *t.DeletedBy
 	}
 	return 0
 }
 
-func (t *CheckIn) BeforeCreate(tx *gorm.DB) error {
+func (t *Checkin) BeforeCreate(tx *gorm.DB) error {
 	if err := setBlameableFieldsBeforeCreate(tx, &t.CreatedBy, &t.UpdatedBy); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (t *CheckIn) BeforeUpdate(tx *gorm.DB) error {
+func (t *Checkin) BeforeUpdate(tx *gorm.DB) error {
 	if err := setBlameableFieldsBeforeUpdate(tx, &t.UpdatedBy); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (t *CheckIn) BeforeDelete(tx *gorm.DB) error {
+func (t *Checkin) BeforeDelete(tx *gorm.DB) error {
 	return setBlameableFieldsBeforeDelete(tx, t, t.ID)
 }
