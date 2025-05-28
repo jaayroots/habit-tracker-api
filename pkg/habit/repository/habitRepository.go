@@ -12,4 +12,5 @@ type HabitRepository interface {
 	Update(pctx echo.Context, habit *entities.Habit) (*entities.Habit, error)
 	Delete(pctx echo.Context, habitID uint) (*entities.Habit, error)
 	FindAll(pctx echo.Context, habitSearchReq *_habitModel.HabitSearchReq) ([]*entities.Habit, int, error)
+	FindByIDAndUserID(pctx echo.Context, habitID uint, userID uint) (*entities.Habit, error)
 }

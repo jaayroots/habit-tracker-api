@@ -7,9 +7,10 @@ import (
 )
 
 type Checkin struct {
-	ID      uint `gorm:"primaryKey"`
-	HabitID uint `gorm:"not null"`
-	Date    *time.Time
+	ID      uint      `gorm:"primaryKey"`
+	HabitID uint      `gorm:"index;not null"`
+	Habit   *Habit    `gorm:"foreignKey:HabitID"`
+	Date    time.Time `gorm:"autoCreateTime"`
 
 	CreatedAt time.Time      `gorm:"autoCreateTime"`
 	UpdatedAt time.Time      `gorm:"autoUpdateTime"`

@@ -161,3 +161,22 @@ func (r *habitRepositoryImpl) filterFrequency(query *gorm.DB, habitFilterReq _ha
 	query = query.Where("frequency = ?", *frequency)
 	return query
 }
+
+func (r *habitRepositoryImpl) FindByIDAndUserID(pctx echo.Context, habitID uint, userID uint) (*entities.Habit, error) {
+	ctx := pctx.Request().Context()
+	var habit entities.Habit
+
+	err := r.db.Connect().
+		WithContext(ctx).
+		Where("id = ? AND user_id = ?", habitID, userID).
+		First(&habit).Error
+
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, _habitException.NotFoundHabit()
+		}
+		return nil, err
+	}
+
+	return &habit, nil
+}
