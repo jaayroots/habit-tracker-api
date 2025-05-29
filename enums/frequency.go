@@ -10,9 +10,9 @@ const (
 func (s Frequency) String() string {
 	switch s {
 	case Daily:
-		return "new"
+		return "daily"
 	case Weekly:
-		return "pending"
+		return "weekly"
 	default:
 		return "unknow"
 	}
@@ -25,7 +25,7 @@ func FetfrequencyMap() map[int]string {
 	}
 }
 
-func FsValidfrequency(value int) bool {
+func IsValidFrequency(value int) bool {
 	switch Frequency(value) {
 	case Daily, Weekly:
 		return true

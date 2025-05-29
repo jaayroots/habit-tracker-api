@@ -4,11 +4,12 @@ import (
 	"time"
 
 	"github.com/jaayroots/habit-tracker-api/config"
+	"github.com/jaayroots/habit-tracker-api/utils"
+
 	_authException "github.com/jaayroots/habit-tracker-api/pkg/auth/exception"
 	_authMapper "github.com/jaayroots/habit-tracker-api/pkg/auth/mapper"
 	_authModel "github.com/jaayroots/habit-tracker-api/pkg/auth/model"
 	_authRepository "github.com/jaayroots/habit-tracker-api/pkg/auth/repository"
-	_utils "github.com/jaayroots/habit-tracker-api/pkg/auth/utils"
 	_userException "github.com/jaayroots/habit-tracker-api/pkg/user/exception"
 	_userMapper "github.com/jaayroots/habit-tracker-api/pkg/user/mapper"
 	_userModel "github.com/jaayroots/habit-tracker-api/pkg/user/model"
@@ -66,7 +67,7 @@ func (s *authServiceImpl) Login(loginReq *_authModel.LoginReq) (*_authModel.Logi
 		return nil, _userException.NotFoundUser()
 	}
 
-	isValid := _utils.CheckPasswordHash(loginReq.Password, user.Password)
+	isValid := utils.CheckPasswordHash(loginReq.Password, user.Password)
 	if !isValid {
 		return nil, _authException.AuthenticationFailed()
 	}
@@ -76,7 +77,7 @@ func (s *authServiceImpl) Login(loginReq *_authModel.LoginReq) (*_authModel.Logi
 		expToken = 24
 	}
 
-	token, exp, err := _utils.HashToken(_userMapper.ToUserRes(user), expToken)
+	token, exp, err := utils.HashToken(_userMapper.ToUserRes(user), expToken)
 	if err != nil {
 		return nil, err
 	}
@@ -167,7 +168,7 @@ func (s *authServiceImpl) Refreash(ipAddress string, userID uint) (*_authModel.L
 		expToken = 24
 	}
 
-	token, exp, err := _utils.HashToken(_userMapper.ToUserRes(user), expToken)
+	token, exp, err := utils.HashToken(_userMapper.ToUserRes(user), expToken)
 	if err != nil {
 		return nil, err
 	}

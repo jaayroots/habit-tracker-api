@@ -4,11 +4,11 @@ import (
 	"net/http"
 
 	"github.com/jaayroots/habit-tracker-api/pkg/custom"
+	"github.com/jaayroots/habit-tracker-api/utils"
 	"github.com/labstack/echo/v4"
 
 	_userModel "github.com/jaayroots/habit-tracker-api/pkg/user/model"
 	_userService "github.com/jaayroots/habit-tracker-api/pkg/user/service"
-	_utils "github.com/jaayroots/habit-tracker-api/utils"
 )
 
 type userContollerImpl struct {
@@ -25,7 +25,7 @@ func NewUserControllerImpl(
 
 func (c *userContollerImpl) FindByID(pctx echo.Context) error {
 
-	userID, err := _utils.StrToUint(pctx.Param("userID"))
+	userID, err := utils.StrToUint(pctx.Param("userID"))
 	if err != nil {
 		return custom.Response(pctx, http.StatusBadRequest, nil, "Invalid userID", nil)
 	}
@@ -48,7 +48,7 @@ func (c *userContollerImpl) Update(pctx echo.Context) error {
 		return custom.Response(pctx, http.StatusBadRequest, nil, "Invalid request", err)
 	}
 
-	userID, err := _utils.StrToUint(pctx.Param("userID"))
+	userID, err := utils.StrToUint(pctx.Param("userID"))
 	if err != nil {
 		return custom.Response(pctx, http.StatusBadRequest, nil, "Invalid userID", nil)
 	}
@@ -64,7 +64,7 @@ func (c *userContollerImpl) Update(pctx echo.Context) error {
 
 func (c *userContollerImpl) Delete(pctx echo.Context) error {
 
-	userID, err := _utils.StrToUint(pctx.Param("userID"))
+	userID, err := utils.StrToUint(pctx.Param("userID"))
 	if err != nil {
 		return custom.Response(pctx, http.StatusBadRequest, nil, "Invalid userID", nil)
 	}
