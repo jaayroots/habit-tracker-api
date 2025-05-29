@@ -41,6 +41,7 @@ cd habit-tracker-api
 ```bash
 cp config/config.example.yaml config/config.yaml
 ```
+Please recheck config.yaml Database connection and generate new jwtsecret
 
 ### 3. Create PostgreSQL Database
 
