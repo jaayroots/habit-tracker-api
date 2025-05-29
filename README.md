@@ -34,7 +34,7 @@ Built with Go using the Echo framework, PostgreSQL, GORM, and JWT for authentica
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourname/habit-tracker-api.git
+git clone https://github.com/jaayroots/habit-tracker-api.git
 cd habit-tracker-api
 ```
 ### 2. Create config.yaml
