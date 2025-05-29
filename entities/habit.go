@@ -11,6 +11,7 @@ type Habit struct {
 	ID          uint            `gorm:"primaryKey"`
 	UserID      uint            `gorm:"not null"`
 	Title       string          `gorm:"type:varchar(255);not null"`
+	Description string          `gorm:"type:text"`
 	Frequency   enums.Frequency `gorm:"type:int;default:1;not null"`
 	TargetCount uint            `gorm:"not null"`
 
@@ -22,7 +23,7 @@ type Habit struct {
 	UpdatedBy uint  `gorm:"not null"`
 	DeletedBy *uint `gorm:"column:deleted_by"`
 
-	HabitID CheckIn `gorm:"foreignKey:HabitID;references:ID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
+	Checkins []*Checkin `gorm:"foreignKey:HabitID;constraint:OnDelete:CASCADE"`
 }
 
 func (t *Habit) GetCreatedBy() uint {
