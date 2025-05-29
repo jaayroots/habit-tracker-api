@@ -5,6 +5,7 @@ import (
 	_checkinRepository "github.com/jaayroots/habit-tracker-api/pkg/checkin/repository"
 	_habitRepository "github.com/jaayroots/habit-tracker-api/pkg/habit/repository"
 	_userRepository "github.com/jaayroots/habit-tracker-api/pkg/user/repository"
+	"github.com/jaayroots/habit-tracker-api/utils"
 	"github.com/labstack/echo/v4"
 
 	_checkinMapper "github.com/jaayroots/habit-tracker-api/pkg/checkin/mapper"
@@ -12,7 +13,6 @@ import (
 	_habitException "github.com/jaayroots/habit-tracker-api/pkg/habit/exception"
 	_userException "github.com/jaayroots/habit-tracker-api/pkg/user/exception"
 	_userModel "github.com/jaayroots/habit-tracker-api/pkg/user/model"
-	_utils "github.com/jaayroots/habit-tracker-api/utils"
 )
 
 type checkinServiceImpl struct {
@@ -71,7 +71,7 @@ func (s *checkinServiceImpl) Create(pctx echo.Context, checkinReq *_checkinModel
 }
 
 func (s *checkinServiceImpl) prepareUserBlamable(habitEntity *entities.Checkin) ([]*entities.User, error) {
-	userIDArray := _utils.ExtractAuditUserID(habitEntity)
+	userIDArray := utils.ExtractAuditUserID(habitEntity)
 	userArr, err := s.userRepository.FindByIDs(userIDArray)
 	if err != nil {
 		return nil, err
@@ -87,7 +87,7 @@ func (s *checkinServiceImpl) FindAll(pctx echo.Context, checkinSearchReq *_check
 		return nil, err
 	}
 
-	userIDArray := _utils.ExtractAuditUserIDs(checkin)
+	userIDArray := utils.ExtractAuditUserIDs(checkin)
 	userArr, err := s.userRepository.FindByIDs(userIDArray)
 	if err != nil {
 		return nil, err
@@ -95,4 +95,20 @@ func (s *checkinServiceImpl) FindAll(pctx echo.Context, checkinSearchReq *_check
 
 	return _checkinMapper.ToCheckinSearchRes(checkinSearchReq, userArr, checkin, total), nil
 
+}
+
+func (s *checkinServiceImpl) Delete(pctx echo.Context, checkinID uint) (*_checkinModel.CheckinRes, error) {
+
+	checkinEntity, err := s.checkinRepository.Delete(pctx, checkinID)
+	if err != nil {
+		return nil, err
+	}
+
+	userArr, err := s.prepareUserBlamable(checkinEntity)
+	if err != nil {
+		return nil, err
+	}
+	checkinRes := _checkinMapper.ToCheckinRes(checkinEntity, userArr)
+
+	return checkinRes, nil
 }

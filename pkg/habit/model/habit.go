@@ -39,6 +39,7 @@ type (
 		Title       *string `json:"title"`
 		Description *string `json:"description"`
 		Frequency   *int    `json:"frequency"`
+		TargetCount *int    `json:"target_count"`
 	}
 
 	HabitSearchRes struct {

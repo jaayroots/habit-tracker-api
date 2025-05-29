@@ -5,10 +5,10 @@ import (
 
 	"github.com/jaayroots/habit-tracker-api/pkg/custom"
 	_habitService "github.com/jaayroots/habit-tracker-api/pkg/habit/service"
+	"github.com/jaayroots/habit-tracker-api/utils"
 	"github.com/labstack/echo/v4"
 
 	_habitModel "github.com/jaayroots/habit-tracker-api/pkg/habit/model"
-	_utils "github.com/jaayroots/habit-tracker-api/utils"
 )
 
 type habitContollerImpl struct {
@@ -42,7 +42,7 @@ func (c *habitContollerImpl) Create(pctx echo.Context) error {
 
 func (c *habitContollerImpl) FindByID(pctx echo.Context) error {
 
-	habitID, err := _utils.StrToUint(pctx.Param("habitID"))
+	habitID, err := utils.StrToUint(pctx.Param("habitID"))
 	if err != nil {
 		return custom.Response(pctx, http.StatusBadRequest, nil, "Invalid habitID", nil)
 	}
@@ -58,7 +58,7 @@ func (c *habitContollerImpl) FindByID(pctx echo.Context) error {
 
 func (c *habitContollerImpl) Update(pctx echo.Context) error {
 
-	habitID, err := _utils.StrToUint(pctx.Param("habitID"))
+	habitID, err := utils.StrToUint(pctx.Param("habitID"))
 	if err != nil {
 		return custom.Response(pctx, http.StatusBadRequest, nil, "Invalid habitID", nil)
 	}
@@ -80,7 +80,7 @@ func (c *habitContollerImpl) Update(pctx echo.Context) error {
 
 func (c *habitContollerImpl) Delete(pctx echo.Context) error {
 
-	habitID, err := _utils.StrToUint(pctx.Param("habitID"))
+	habitID, err := utils.StrToUint(pctx.Param("habitID"))
 	if err != nil {
 		return custom.Response(pctx, http.StatusBadRequest, nil, "Invalid habitID", nil)
 	}

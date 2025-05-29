@@ -2,12 +2,13 @@ package mapper
 
 import (
 	"github.com/jaayroots/habit-tracker-api/entities"
-	_authUtils "github.com/jaayroots/habit-tracker-api/pkg/auth/utils"
+	"github.com/jaayroots/habit-tracker-api/utils"
+
 	_userModel "github.com/jaayroots/habit-tracker-api/pkg/user/model"
 )
 
 func ToUserEntity(userReq *_userModel.UserReq) (*entities.User, error) {
-	hashedPassword, err := _authUtils.HashPassword(userReq.Password)
+	hashedPassword, err := utils.HashPassword(userReq.Password)
 	if err != nil {
 		return nil, err
 	}

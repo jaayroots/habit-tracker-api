@@ -6,10 +6,9 @@ import (
 	_checkinModel "github.com/jaayroots/habit-tracker-api/pkg/checkin/model"
 	_habitException "github.com/jaayroots/habit-tracker-api/pkg/habit/exception"
 	_habitModel "github.com/jaayroots/habit-tracker-api/pkg/habit/model"
+	"github.com/jaayroots/habit-tracker-api/utils"
 
 	"github.com/labstack/echo/v4"
-
-	_utils "github.com/jaayroots/habit-tracker-api/utils"
 )
 
 func ToHabitEntity(pctx echo.Context, habitReq *_habitModel.HabitReq, habitID uint) (*entities.Habit, error) {
@@ -32,7 +31,7 @@ func ToHabitEntity(pctx echo.Context, habitReq *_habitModel.HabitReq, habitID ui
 
 func ToHabitRes(habit *entities.Habit, checkinGroup []*_checkinModel.GroupByHabitIDcheckin, user []*entities.User) *_habitModel.HabitRes {
 
-	userMap := _utils.MapperByID(user)
+	userMap := utils.MapperByID(user)
 	createdBy := func() *string {
 		if user, ok := userMap[habit.CreatedBy]; ok {
 			fullName := user.FirstName + " " + user.LastName
@@ -81,7 +80,7 @@ func ToHabitSearchRes(
 		habitResList = append(habitResList, ToHabitRes(habit, checkinGroup, user))
 	}
 
-	_, _, totalPage := _utils.PaginateCalculate(habitSearchReq.Page, habitSearchReq.Limit, total)
+	_, _, totalPage := utils.PaginateCalculate(habitSearchReq.Page, habitSearchReq.Limit, total)
 	return &_habitModel.HabitSearchRes{
 		Item: habitResList,
 		Paginate: _habitModel.PaginateResult{

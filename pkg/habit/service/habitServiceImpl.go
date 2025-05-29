@@ -7,7 +7,7 @@ import (
 	_habitModel "github.com/jaayroots/habit-tracker-api/pkg/habit/model"
 	_habitRepository "github.com/jaayroots/habit-tracker-api/pkg/habit/repository"
 	_userRepository "github.com/jaayroots/habit-tracker-api/pkg/user/repository"
-	_utils "github.com/jaayroots/habit-tracker-api/utils"
+	"github.com/jaayroots/habit-tracker-api/utils"
 	"github.com/labstack/echo/v4"
 
 	_userException "github.com/jaayroots/habit-tracker-api/pkg/user/exception"
@@ -122,7 +122,7 @@ func (s *habitServiceImpl) Delete(pctx echo.Context, habitID uint) (*_habitModel
 }
 
 func (s *habitServiceImpl) prepareUserBlamable(habitEntity *entities.Habit) ([]*entities.User, error) {
-	userIDArray := _utils.ExtractAuditUserID(habitEntity)
+	userIDArray := utils.ExtractAuditUserID(habitEntity)
 	userArr, err := s.userRepository.FindByIDs(userIDArray)
 	if err != nil {
 		return nil, err
@@ -148,7 +148,7 @@ func (s *habitServiceImpl) FindAll(pctx echo.Context, habitSearchReq *_habitMode
 		return nil, err
 	}
 
-	userIDArray := _utils.ExtractAuditUserIDs(habits)
+	userIDArray := utils.ExtractAuditUserIDs(habits)
 	userArr, err := s.userRepository.FindByIDs(userIDArray)
 	if err != nil {
 		return nil, err

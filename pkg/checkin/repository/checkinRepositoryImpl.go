@@ -1,6 +1,8 @@
 package repository
 
 import (
+	"errors"
+
 	databases "github.com/jaayroots/habit-tracker-api/database"
 	"github.com/jaayroots/habit-tracker-api/entities"
 	"github.com/labstack/echo/v4"
@@ -61,6 +63,45 @@ func (r *checkinRepositoryImpl) FindAll(pctx echo.Context, checkinSearchReq *_ch
 	}
 
 	return checkin, int(total), nil
+}
+
+func (r *checkinRepositoryImpl) Delete(pctx echo.Context, checkinID uint) (*entities.Checkin, error) {
+
+	checkinEntity, err := r.FindByID(pctx, checkinID)
+	if err != nil {
+		return nil, err
+	}
+
+	ctx := pctx.Request().Context()
+	err = r.db.Connect().
+		WithContext(ctx).
+		Delete(checkinEntity).Error
+
+	if err != nil {
+		return nil, _checkinException.CannotDeleteCheckin()
+	}
+
+	return checkinEntity, nil
+}
+
+func (r *checkinRepositoryImpl) FindByID(pctx echo.Context, checkinID uint) (*entities.Checkin, error) {
+
+	checkin := new(entities.Checkin)
+	ctx := pctx.Request().Context()
+	err := r.db.Connect().
+		WithContext(ctx).
+		Model(&entities.Checkin{}).
+		First(checkin, checkinID).
+		Error
+
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			return nil, _checkinException.NotFoundCheckin()
+		}
+		return nil, err
+	}
+
+	return checkin, nil
 }
 
 func (r *checkinRepositoryImpl) searchFilter(query *gorm.DB, checkinSearchReq *_checkinModel.CheckinSearchReq) *gorm.DB {

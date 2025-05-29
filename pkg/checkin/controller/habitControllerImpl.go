@@ -5,6 +5,7 @@ import (
 
 	_checkinService "github.com/jaayroots/habit-tracker-api/pkg/checkin/service"
 	"github.com/jaayroots/habit-tracker-api/pkg/custom"
+	"github.com/jaayroots/habit-tracker-api/utils"
 	"github.com/labstack/echo/v4"
 
 	_checkinModel "github.com/jaayroots/habit-tracker-api/pkg/checkin/model"
@@ -53,5 +54,21 @@ func (c *checkinContollerImpl) FindAll(pctx echo.Context) error {
 	}
 
 	return custom.Response(pctx, http.StatusOK, checkinSearch, "", nil)
+
+}
+
+func (c *checkinContollerImpl) Delete(pctx echo.Context) error {
+
+	checkinID, err := utils.StrToUint(pctx.Param("checkinID"))
+	if err != nil {
+		return custom.Response(pctx, http.StatusBadRequest, nil, "Invalid checkinID", nil)
+	}
+
+	_, err = c.checkinService.Delete(pctx, checkinID)
+	if err != nil {
+		return custom.Response(pctx, http.StatusBadRequest, nil, err.Error(), nil)
+	}
+
+	return custom.Response(pctx, http.StatusOK, nil, "", nil)
 
 }

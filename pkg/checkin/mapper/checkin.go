@@ -3,10 +3,9 @@ package mapper
 import (
 	"github.com/jaayroots/habit-tracker-api/entities"
 	_checkinModel "github.com/jaayroots/habit-tracker-api/pkg/checkin/model"
+	"github.com/jaayroots/habit-tracker-api/utils"
 
 	"github.com/labstack/echo/v4"
-
-	_utils "github.com/jaayroots/habit-tracker-api/utils"
 )
 
 func ToCheckinEntity(pctx echo.Context, checkinReq *_checkinModel.CheckinReq, checkinID uint) (*entities.Checkin, error) {
@@ -21,7 +20,7 @@ func ToCheckinEntity(pctx echo.Context, checkinReq *_checkinModel.CheckinReq, ch
 
 func ToCheckinRes(checkin *entities.Checkin, user []*entities.User) *_checkinModel.CheckinRes {
 
-	userMap := _utils.MapperByID(user)
+	userMap := utils.MapperByID(user)
 	createdBy := func() *string {
 		if user, ok := userMap[checkin.CreatedBy]; ok {
 			fullName := user.FirstName + " " + user.LastName
@@ -60,7 +59,7 @@ func ToCheckinSearchRes(
 		checkinResList = append(checkinResList, ToCheckinRes(checkin, user))
 	}
 
-	_, _, totalPage := _utils.PaginateCalculate(checkinSearchReq.Page, checkinSearchReq.Limit, total)
+	_, _, totalPage := utils.PaginateCalculate(checkinSearchReq.Page, checkinSearchReq.Limit, total)
 	return &_checkinModel.CheckinSearchRes{
 		Item: checkinResList,
 		Paginate: _checkinModel.PaginateResult{

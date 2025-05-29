@@ -137,6 +137,7 @@ func (r *habitRepositoryImpl) searchFilter(query *gorm.DB, habitSearchReq *_habi
 	query = r.filterTitle(query, habitSearchReq.Filter)
 	query = r.filterDescription(query, habitSearchReq.Filter)
 	query = r.filterFrequency(query, habitSearchReq.Filter)
+	query = r.filterTargetCount(query, habitSearchReq.Filter)
 	return query
 }
 
@@ -170,6 +171,17 @@ func (r *habitRepositoryImpl) filterFrequency(query *gorm.DB, habitFilterReq _ha
 	}
 
 	query = query.Where("frequency = ?", *frequency)
+	return query
+}
+
+func (r *habitRepositoryImpl) filterTargetCount(query *gorm.DB, habitFilterReq _habitModel.HabitFilterReq) *gorm.DB {
+
+	targetCount := habitFilterReq.TargetCount
+	if targetCount == nil {
+		return query
+	}
+
+	query = query.Where("target_count = ?", *targetCount)
 	return query
 }
 
