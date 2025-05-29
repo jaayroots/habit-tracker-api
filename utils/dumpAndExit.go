@@ -12,6 +12,7 @@ func DumpAndExit(v ...interface{}) {
 			fmt.Println("Error:", err)
 		} else {
 			fmt.Println(string(b))
+			fmt.Println("-------------------------------")
 		}
 	}
 }

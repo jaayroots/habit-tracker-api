@@ -13,6 +13,11 @@ type (
 		HabitID int `json:"habit_id" validate:"required"`
 	}
 
+	GroupByHabitIDcheckin struct {
+		HabitID uint
+		Count   int64
+	}
+
 	CheckinRes struct {
 		ID        int     `json:"id"`
 		HabitID   int     `json:"habit_id"`

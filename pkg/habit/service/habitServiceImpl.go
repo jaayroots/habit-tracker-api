@@ -2,6 +2,7 @@ package service
 
 import (
 	"github.com/jaayroots/habit-tracker-api/entities"
+	_checkinRepository "github.com/jaayroots/habit-tracker-api/pkg/checkin/repository"
 	_habitMapper "github.com/jaayroots/habit-tracker-api/pkg/habit/mapper"
 	_habitModel "github.com/jaayroots/habit-tracker-api/pkg/habit/model"
 	_habitRepository "github.com/jaayroots/habit-tracker-api/pkg/habit/repository"
@@ -14,17 +15,21 @@ import (
 )
 
 type habitServiceImpl struct {
-	habitRepository _habitRepository.HabitRepository
-	userRepository  _userRepository.UserRepository
+	habitRepository   _habitRepository.HabitRepository
+	userRepository    _userRepository.UserRepository
+	checkinRepository _checkinRepository.CheckinRepository
 }
 
 func NewHabitServiceImpl(
 	habitRepository _habitRepository.HabitRepository,
 	userRepository _userRepository.UserRepository,
+	checkinRepository _checkinRepository.CheckinRepository,
+
 ) HabitService {
 	return &habitServiceImpl{
-		habitRepository: habitRepository,
-		userRepository:  userRepository,
+		habitRepository:   habitRepository,
+		userRepository:    userRepository,
+		checkinRepository: checkinRepository,
 	}
 }
 
@@ -52,7 +57,7 @@ func (s *habitServiceImpl) Create(pctx echo.Context, habitReq *_habitModel.Habit
 		return nil, err
 	}
 
-	habitRes := _habitMapper.ToHabitRes(habitEntity, userArr)
+	habitRes := _habitMapper.ToHabitRes(habitEntity, nil, userArr)
 	return habitRes, nil
 }
 
@@ -68,7 +73,15 @@ func (s *habitServiceImpl) FindByID(pctx echo.Context, habitID uint) (*_habitMod
 		return nil, err
 	}
 
-	habitRes := _habitMapper.ToHabitRes(habitEntity, userArr)
+	var habitIDs []uint
+	habitIDs = append(habitIDs, habitEntity.ID)
+
+	groupByHabitIDcheckin, err := s.checkinRepository.GroupByHabitIDcheckin(pctx, habitIDs)
+	if err != nil {
+		return nil, err
+	}
+
+	habitRes := _habitMapper.ToHabitRes(habitEntity, groupByHabitIDcheckin, userArr)
 	return habitRes, nil
 }
 
@@ -89,7 +102,7 @@ func (s *habitServiceImpl) Update(pctx echo.Context, habitID uint, habitReq *_ha
 		return nil, err
 	}
 
-	habitRes := _habitMapper.ToHabitRes(habitEntity, userArr)
+	habitRes := _habitMapper.ToHabitRes(habitEntity, nil, userArr)
 	return habitRes, nil
 }
 
@@ -104,7 +117,7 @@ func (s *habitServiceImpl) Delete(pctx echo.Context, habitID uint) (*_habitModel
 	if err != nil {
 		return nil, err
 	}
-	habitRes := _habitMapper.ToHabitRes(habitEntity, userArr)
+	habitRes := _habitMapper.ToHabitRes(habitEntity, nil, userArr)
 	return habitRes, nil
 }
 
@@ -125,12 +138,22 @@ func (s *habitServiceImpl) FindAll(pctx echo.Context, habitSearchReq *_habitMode
 		return nil, err
 	}
 
+	var habitIDs []uint
+	for _, h := range habits {
+		habitIDs = append(habitIDs, h.ID)
+	}
+
+	groupByHabitIDcheckin, err := s.checkinRepository.GroupByHabitIDcheckin(pctx, habitIDs)
+	if err != nil {
+		return nil, err
+	}
+
 	userIDArray := _utils.ExtractAuditUserIDs(habits)
 	userArr, err := s.userRepository.FindByIDs(userIDArray)
 	if err != nil {
 		return nil, err
 	}
 
-	return _habitMapper.ToHabitSearchRes(habitSearchReq, userArr, habits, total), nil
+	return _habitMapper.ToHabitSearchRes(habitSearchReq, userArr, habits, groupByHabitIDcheckin, total), nil
 
 }

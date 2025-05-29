@@ -22,6 +22,7 @@ type (
 		Description string  `json:"description"`
 		Frequency   int     `json:"frequency"`
 		TargetCount int     `json:"target_count"`
+		Checkin     int     `json:"checkin"`
 		CreatedAt   int64   `json:"created_at"`
 		UpdatedAt   int64   `json:"updated_at"`
 		CreatedBy   *string `json:"created_by"`

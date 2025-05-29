@@ -3,6 +3,7 @@ package mapper
 import (
 	"github.com/jaayroots/habit-tracker-api/entities"
 	"github.com/jaayroots/habit-tracker-api/enums"
+	_checkinModel "github.com/jaayroots/habit-tracker-api/pkg/checkin/model"
 	_habitException "github.com/jaayroots/habit-tracker-api/pkg/habit/exception"
 	_habitModel "github.com/jaayroots/habit-tracker-api/pkg/habit/model"
 
@@ -29,7 +30,7 @@ func ToHabitEntity(pctx echo.Context, habitReq *_habitModel.HabitReq, habitID ui
 	return habitEntity, nil
 }
 
-func ToHabitRes(habit *entities.Habit, user []*entities.User) *_habitModel.HabitRes {
+func ToHabitRes(habit *entities.Habit, checkinGroup []*_checkinModel.GroupByHabitIDcheckin, user []*entities.User) *_habitModel.HabitRes {
 
 	userMap := _utils.MapperByID(user)
 	createdBy := func() *string {
@@ -48,12 +49,18 @@ func ToHabitRes(habit *entities.Habit, user []*entities.User) *_habitModel.Habit
 		return nil
 	}()
 
+	habitMap := make(map[uint]uint)
+	for _, c := range checkinGroup {
+		habitMap[c.HabitID] = uint(c.Count)
+	}
+
 	return &_habitModel.HabitRes{
 		ID:          int(habit.ID),
 		Title:       habit.Title,
 		Description: habit.Description,
 		Frequency:   int(habit.Frequency),
 		TargetCount: int(habit.TargetCount),
+		Checkin:     int(habitMap[habit.ID]),
 		CreatedAt:   habit.CreatedAt.Unix(),
 		UpdatedAt:   habit.UpdatedAt.Unix(),
 		CreatedBy:   createdBy,
@@ -61,17 +68,17 @@ func ToHabitRes(habit *entities.Habit, user []*entities.User) *_habitModel.Habit
 	}
 }
 
-
 func ToHabitSearchRes(
 	habitSearchReq *_habitModel.HabitSearchReq,
 	user []*entities.User,
 	habits []*entities.Habit,
+	checkinGroup []*_checkinModel.GroupByHabitIDcheckin,
 	total int,
 ) *_habitModel.HabitSearchRes {
 
 	habitResList := make([]*_habitModel.HabitRes, 0, len(habits))
 	for _, habit := range habits {
-		habitResList = append(habitResList, ToHabitRes(habit, user))
+		habitResList = append(habitResList, ToHabitRes(habit, checkinGroup, user))
 	}
 
 	_, _, totalPage := _utils.PaginateCalculate(habitSearchReq.Page, habitSearchReq.Limit, total)

@@ -47,9 +47,7 @@ func (r *checkinRepositoryImpl) FindAll(pctx echo.Context, checkinSearchReq *_ch
 
 	query := r.db.Connect().
 		WithContext(ctx).
-		Model(&entities.Checkin{}).
-		Joins("JOIN habits h ON checkins.habit_id = h.id").
-		Preload("Habit")
+		Model(&entities.Checkin{})
 
 	offset, limit, _ := utils.PaginateCalculate(checkinSearchReq.Page, checkinSearchReq.Limit, 0)
 	query = r.searchFilter(query, checkinSearchReq)
@@ -68,7 +66,6 @@ func (r *checkinRepositoryImpl) FindAll(pctx echo.Context, checkinSearchReq *_ch
 func (r *checkinRepositoryImpl) searchFilter(query *gorm.DB, checkinSearchReq *_checkinModel.CheckinSearchReq) *gorm.DB {
 
 	query = r.filterHabit(query, checkinSearchReq.Filter)
-	query = r.filterFrequency(query, checkinSearchReq.Filter)
 	return query
 }
 
@@ -83,13 +80,21 @@ func (r *checkinRepositoryImpl) filterHabit(query *gorm.DB, habitFilterReq _chec
 	return query
 }
 
-func (r *checkinRepositoryImpl) filterFrequency(query *gorm.DB, habitFilterReq _checkinModel.CheckinFilterReq) *gorm.DB {
+func (r *checkinRepositoryImpl) GroupByHabitIDcheckin(pctx echo.Context, habitIDs []uint) ([]*_checkinModel.GroupByHabitIDcheckin, error) {
 
-	Frequency := habitFilterReq.Frequency
-	if Frequency == nil || *Frequency == 0 {
-		return query
+	ctx := pctx.Request().Context()
+
+	var checkin []*_checkinModel.GroupByHabitIDcheckin
+	query := r.db.Connect().
+		WithContext(ctx).
+		Model(&entities.Checkin{}).
+		Select("habit_id, COUNT(id) as count").
+		Group("habit_id").
+		Where("habit_id IN ?", habitIDs)
+
+	if err := query.Find(&checkin).Error; err != nil {
+		return nil, err
 	}
 
-	query = query.Where("h.frequency = ?", Frequency)
-	return query
+	return checkin, nil
 }

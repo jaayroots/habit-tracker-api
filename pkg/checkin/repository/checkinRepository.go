@@ -10,4 +10,5 @@ import (
 type CheckinRepository interface {
 	Create(pctx echo.Context, checkin *entities.Checkin) (*entities.Checkin, error)
 	FindAll(pctx echo.Context, checkinSearchReq *_checkinModel.CheckinSearchReq) ([]*entities.Checkin, int, error)
+	GroupByHabitIDcheckin(pctx echo.Context, habitIDs []uint) ([]*_checkinModel.GroupByHabitIDcheckin, error)
 }

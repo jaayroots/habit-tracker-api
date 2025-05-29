@@ -18,6 +18,11 @@ type habitRepositoryImpl struct {
 	logger echo.Logger
 }
 
+type CheckinGroup struct {
+	HabitID uint
+	Count   int64
+}
+
 func NewHabitRepositoryImpl(db databases.Database, logger echo.Logger) HabitRepository {
 	return &habitRepositoryImpl{
 		db:     db,
@@ -105,7 +110,9 @@ func (r *habitRepositoryImpl) FindAll(pctx echo.Context, habitSearchReq *_habitM
 	var habit []*entities.Habit
 	var total int64
 	ctx := pctx.Request().Context()
-	query := r.db.Connect().WithContext(ctx).Model(&entities.Habit{})
+	query := r.db.Connect().
+		WithContext(ctx).
+		Model(&entities.Habit{})
 
 	offset, limit, _ := utils.PaginateCalculate(habitSearchReq.Page, habitSearchReq.Limit, 0)
 	query = r.searchFilter(query, habitSearchReq)
@@ -116,6 +123,10 @@ func (r *habitRepositoryImpl) FindAll(pctx echo.Context, habitSearchReq *_habitM
 
 	if err := query.Offset(offset).Limit(limit).Order("created_at DESC").Find(&habit).Error; err != nil {
 		return nil, 0, err
+	}
+
+	if len(habit) == 0 {
+		return nil, 0, nil
 	}
 
 	return habit, int(total), nil
