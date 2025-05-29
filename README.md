@@ -7,7 +7,7 @@ Built with Go using the Echo framework, PostgreSQL, GORM, and JWT for authentica
 
 ## 🚀 Features
 
-- JWT Authentication (Register/Login)
+- JWT Authentication (Register/Login/Logout)
 - Habit CRUD operations
 - Daily check-in tracking
 - View check-in history with pagination
