@@ -1,0 +1,1166 @@
+{
+	"info": {
+		"_postman_id": "bfa9c1ba-eb49-4169-a65c-7fbea5267cb0",
+		"name": "Habit Tracker api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14516680"
+	},
+	"item": [
+		{
+			"name": "Other",
+			"item": [
+				{
+					"name": "health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{habit-api}}/health",
+							"host": [
+								"{{habit-api}}"
+							],
+							"path": [
+								"health"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200-ok",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{go-url-todo}}/health",
+									"host": [
+										"{{go-url-todo}}"
+									],
+									"path": [
+										"health"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain; charset=UTF-8"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 May 2025 03:26:11 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								}
+							],
+							"cookie": [],
+							"body": "OK"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"chakkapon.jay@gmail.com\",\n    \"password\": \"123456\",\n    \"first_name\": \"jaay\",\n    \"last_name\": \"root\",\n    \"avatar\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{habit-api}}/auth/register",
+							"host": [
+								"{{habit-api}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"chakkapon.jay@gmail.com\",\n    \"password\": \"123456\",\n    \"first_name\": \"jaay\",\n    \"last_name\": \"root\",\n    \"avatar\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{go-url-todo}}/auth/register",
+									"host": [
+										"{{go-url-todo}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 16 May 2025 05:25:42 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "161"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"code\": 200,\n    \"message\": \"Register successful\",\n    \"data\": {\n        \"id\": 3,\n        \"email\": \"chakkapon.jay@gmail.com\",\n        \"first_name\": \"jaay\",\n        \"last_name\": \"root\",\n        \"avatar\": \"\"\n    }\n}"
+						},
+						{
+							"name": "400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"chakkapon.jay@gmail.com\",\n    \"password\": \"123456\",\n    \"first_name\": \"jaay\",\n    \"last_name\": \"root\",\n    \"avatar\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{go-url-todo}}/auth/register",
+									"host": [
+										"{{go-url-todo}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 16 May 2025 05:25:50 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "56"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"code\": 400,\n    \"errors\": \"User is already\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"chakkapon.jay@gmail.com\",\n    \"password\": \"123456\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{habit-api}}/auth/login",
+							"host": [
+								"{{habit-api}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"chakkapon.jay@gmail.com\",\n    \"password\": \"123456\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{go-url-todo}}/auth/login",
+									"host": [
+										"{{go-url-todo}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 16 May 2025 05:23:58 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "418"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"code\": 200,\n    \"message\": \"Login successful\",\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NDc0NTk0MzgsImluZm8iOnsiaWQiOjEsImVtYWlsIjoiY2hha2thcG9uLmpheUBnbWFpbC5jb20iLCJmaXJzdF9uYW1lIjoiamFheSIsImxhc3RfbmFtZSI6InJvb3QiLCJhdmF0YXIiOiIifX0.k_H4Cbm-ZpiJ7X6FQnMpxUalxRuf6u3gQu-SuTI3szw\",\n        \"user\": {\n            \"id\": 1,\n            \"email\": \"chakkapon.jay@gmail.com\",\n            \"first_name\": \"jaay\",\n            \"last_name\": \"root\",\n            \"avatar\": \"\"\n        }\n    }\n}"
+						},
+						{
+							"name": "401",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"jay@gmail.com\",\n    \"password\": \"123456\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{go-url-todo}}/auth/login",
+									"host": [
+										"{{go-url-todo}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 16 May 2025 05:24:56 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "55"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"code\": 401,\n    \"errors\": \"Not found user\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Refreash",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{go-url-todo}}/auth/refreash",
+							"host": [
+								"{{go-url-todo}}"
+							],
+							"path": [
+								"auth",
+								"refreash"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{go-url-todo}}/auth/logout",
+							"host": [
+								"{{go-url-todo}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{go-url-todo}}/auth/logout",
+									"host": [
+										"{{go-url-todo}}"
+									],
+									"path": [
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 16 May 2025 05:26:20 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "68"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"code\": 200,\n    \"message\": \"Logout successful\",\n    \"data\": \"\"\n}"
+						},
+						{
+							"name": "401",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{go-url-todo}}/auth/logout",
+									"host": [
+										"{{go-url-todo}}"
+									],
+									"path": [
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 16 May 2025 05:26:27 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "54"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": false,\n    \"code\": 401,\n    \"errors\": \"Token invalid\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get user by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"chakkapon.jay@gmail.com\",\n    \"password\": \"123456\",\n    \"first_name\": \"jaay\",\n    \"last_name\": \"root\",\n    \"avatar\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{go-url-todo}}/user/:itemID",
+							"host": [
+								"{{go-url-todo}}"
+							],
+							"path": [
+								"user",
+								":itemID"
+							],
+							"variable": [
+								{
+									"key": "itemID",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200-ok",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"chakkapon.jay@gmail.com\",\n    \"password\": \"123456\",\n    \"first_name\": \"jaay\",\n    \"last_name\": \"root\",\n    \"avatar\": \"\"\n}"
+								},
+								"url": {
+									"raw": "{{go-url-todo}}/user/:itemID",
+									"host": [
+										"{{go-url-todo}}"
+									],
+									"path": [
+										"user",
+										":itemID"
+									],
+									"variable": [
+										{
+											"key": "itemID",
+											"value": "23"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 May 2025 07:22:57 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "126"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"code\": 200,\n    \"data\": {\n        \"email\": \"chakkapon.jay@gmail.com\",\n        \"first_name\": \"jaay\",\n        \"last_name\": \"root\",\n        \"avatar\": \"\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update user by id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"chakkapon.jay@gmail.com\",\n    \"first_name\": \"jaay\",\n    \"last_name\": \"root\",\n    \"avatar\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{go-url-todo}}/user/:userID",
+							"host": [
+								"{{go-url-todo}}"
+							],
+							"path": [
+								"user",
+								":userID"
+							],
+							"variable": [
+								{
+									"key": "userID",
+									"value": "23"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200-ok",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"chakkapon.jay@gmail.com\",\n    \"first_name\": \"jaay\",\n    \"last_name\": \"root\",\n    \"avatar\": \"\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{go-url-todo}}/user/:userID",
+									"host": [
+										"{{go-url-todo}}"
+									],
+									"path": [
+										"user",
+										":userID"
+									],
+									"variable": [
+										{
+											"key": "userID",
+											"value": "23"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 May 2025 07:44:14 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"code\": 200,\n    \"data\": \"\"\n}"
+						}
+					]
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"chakkapon.jay@gmail.com\",\n    \"password\": \"123456\",\n    \"first_name\": \"jaay\",\n    \"last_name\": \"root\",\n    \"avatar\": \"\"\n}"
+						},
+						"url": {
+							"raw": "{{go-url-todo}}/user/:itemID",
+							"host": [
+								"{{go-url-todo}}"
+							],
+							"path": [
+								"user",
+								":itemID"
+							],
+							"variable": [
+								{
+									"key": "itemID",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "500-error",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"chakkapon.jay@gmail.com\",\n    \"password\": \"123456\",\n    \"first_name\": \"jaay\",\n    \"last_name\": \"root\",\n    \"avatar\": \"\"\n}"
+								},
+								"url": {
+									"raw": "{{go-url-todo}}/user/:itemID",
+									"host": [
+										"{{go-url-todo}}"
+									],
+									"path": [
+										"user",
+										":itemID"
+									],
+									"variable": [
+										{
+											"key": "itemID",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 May 2025 14:30:26 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "60"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"unsuccess\",\n    \"code\": 500,\n    \"errors\": \"Not found user\"\n}"
+						},
+						{
+							"name": "200-ok",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"chakkapon.jay@gmail.com\",\n    \"password\": \"123456\",\n    \"first_name\": \"jaay\",\n    \"last_name\": \"root\",\n    \"avatar\": \"\"\n}"
+								},
+								"url": {
+									"raw": "{{go-url-todo}}/user/:itemID",
+									"host": [
+										"{{go-url-todo}}"
+									],
+									"path": [
+										"user",
+										":itemID"
+									],
+									"variable": [
+										{
+											"key": "itemID",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 15 May 2025 14:30:53 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"code\": 200,\n    \"data\": \"\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Habit",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Drink Water\",\n  \"description\": \"Drink 2 liters daily\",\n  \"frequency\": 1,\n  \"target_count\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{habit-api}}/habit",
+							"host": [
+								"{{habit-api}}"
+							],
+							"path": [
+								"habit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{habit-api}}/habit/:habitId",
+							"host": [
+								"{{habit-api}}"
+							],
+							"path": [
+								"habit",
+								":habitId"
+							],
+							"variable": [
+								{
+									"key": "habitId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Drink Water Update\",\n  \"description\": \"Drink 2 liters daily update\",\n  \"frequency\": 1,\n  \"target_count\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{habit-api}}/habit/:habitID",
+							"host": [
+								"{{habit-api}}"
+							],
+							"path": [
+								"habit",
+								":habitID"
+							],
+							"variable": [
+								{
+									"key": "habitID",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{habit-api}}/habit/:habitId",
+							"host": [
+								"{{habit-api}}"
+							],
+							"path": [
+								"habit",
+								":habitId"
+							],
+							"variable": [
+								{
+									"key": "habitId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pagiante",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"page\": 1,\n    \"limit\": 10,\n    \"filter\": {\n        \"target_count\":3\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{habit-api}}/habit/search",
+							"host": [
+								"{{habit-api}}"
+							],
+							"path": [
+								"habit",
+								"search"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Checkin",
+			"item": [
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"habit_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{habit-api}}/checkin",
+							"host": [
+								"{{habit-api}}"
+							],
+							"path": [
+								"checkin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pagiante",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"page\": 1,\n    \"limit\": 10,\n    \"filter\": {\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{habit-api}}/checkin/search",
+							"host": [
+								"{{habit-api}}"
+							],
+							"path": [
+								"checkin",
+								"search"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "habit-api",
+			"value": "http://localhost:8880",
+			"type": "string"
+		}
+	]
+}

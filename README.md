@@ -58,4 +58,9 @@ go mod tidy
 go run ./database/migrations/migration.go
 ```
 
+### After go run please add docs postman endpoint
+```bash
+docs/Habit Tracker api.postman_collection.json
+```
+
 
