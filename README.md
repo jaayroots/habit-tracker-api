@@ -55,21 +55,22 @@ go mod tidy
 ```
 
 ### 5. Migration database
-
-- First time promp "make migration" create table migrations and excu again
+- ### 🚨 NOTE: choose already must be command again 🚨
+  
+- First time command "make migrations" create table migrations and command it again
 ![alt text](docs/migration-001.png)
 ![alt text](docs/migration-002.png)
 
-- Enter chose "1" show list migration and status
+- Enter choose "1" show list migration and status
 ![alt text](docs/migration-003.png)
 
-- Enter chose "2" for create file migration with function "up" for migration and "down" for rollback step
+- Enter choose "2" for create file migration with function "up" for migration and "down" for rollback step
 ![alt text](docs/migration-004.png)
 
-- Enter chose "3" for migration file status is "⏳ Pending"
+- Enter choose "3" for migration file status is "⏳ Pending"
 ![alt text](docs/migration-005.png)
 
-- Enter chose "4" for bollback migration 1 setp status is "✅ Applied"
+- Enter choose "4" for rollback migration 1 setp status is "✅ Applied"
 ![alt text](docs/migration-006.png)
 
 ---
