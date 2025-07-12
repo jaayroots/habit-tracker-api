@@ -56,7 +56,7 @@ go mod tidy
 
 ### 5. Migration database
 ```bash
-go run ./database/migrations/migration.go
+make migrations
 ```
 
 ### After go run please add docs postman endpoint
