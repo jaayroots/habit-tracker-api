@@ -55,13 +55,26 @@ go mod tidy
 ```
 
 ### 5. Migration database
-```bash
-make migrations
-```
+
+- First time promp "make migration" create table migrations and excu again
+![alt text](docs/migration-001.png)
+![alt text](docs/migration-002.png)
+
+- Enter chose "1" show list migration and status
+![alt text](docs/migration-003.png)
+
+- Enter chose "2" for create file migration with function "up" for migration and "down" for rollback step
+![alt text](docs/migration-004.png)
+
+- Enter chose "3" for migration file status is "⏳ Pending"
+![alt text](docs/migration-005.png)
+
+- Enter chose "4" for bollback migration 1 setp status is "✅ Applied"
+![alt text](docs/migration-006.png)
+
+---
 
 ### After go run please add docs postman endpoint
-```bash
-docs/Habit Tracker api.postman_collection.json
-```
+📗 docs/Habit Tracker api.postman_collection.json
 
 

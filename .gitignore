@@ -31,5 +31,6 @@ config.yaml
 /.tmp
 /tmp/main
 /.air.toml
+go.sum
 
 # End of https://www.toptal.com/developers/gitignore/api/go
