@@ -17,7 +17,7 @@ import (
 	"github.com/jaayroots/habit-tracker-api/database"
 	"github.com/jaayroots/habit-tracker-api/entities"
 
-	"github.com/jaayroots/habit-tracker-api/migration/packImport"
+	"github.com/jaayroots/habit-tracker-api/command/migration/packImport"
 	"github.com/jedib0t/go-pretty/v6/table"
 )
 
@@ -100,7 +100,7 @@ type MigrationPendingFile struct {
 	Name   string
 }
 
-const migrationFolder = "./migration/list"
+const migrationFolder = "./command/migration/list"
 
 func getMigrationList(tx *gorm.DB, isRender bool) []MigrationPendingFile {
 
@@ -181,7 +181,7 @@ func getMigrationList(tx *gorm.DB, isRender bool) []MigrationPendingFile {
 func createMigrationFile(tx *gorm.DB, name string) {
 
 	safeName := strings.ToLower(strings.ReplaceAll(name, " ", "_"))
-	files, err := os.ReadDir("migration/list")
+	files, err := os.ReadDir("command/migration/list")
 	if err != nil && !os.IsNotExist(err) {
 		panic(fmt.Errorf("❌ Cannnot read migration: %w", err))
 	}
@@ -205,10 +205,10 @@ func createMigrationFile(tx *gorm.DB, name string) {
 	}
 
 	timestamp := time.Now().Format("20060102150405")
-	filename := fmt.Sprintf("migration/migration/%s_%s.go", timestamp, safeName)
+	filename := fmt.Sprintf("command/migration/list/%s_%s.go", timestamp, safeName)
 	funcName := fmt.Sprintf("%s_%s", timestamp, safeName)
 
-	if err := os.MkdirAll("migration/list", os.ModePerm); err != nil {
+	if err := os.MkdirAll("command/migration/list", os.ModePerm); err != nil {
 		panic(fmt.Errorf("❌ Cannot create migration file: %w", err))
 	}
 
@@ -385,9 +385,9 @@ func createMigrationHistory(name string, tx *gorm.DB) error {
 func createMigrationInitFile(migrationFiles []MigrationPendingFile) {
 
 	safeName := "packImport"
-	filename := fmt.Sprintf("migration/packImport/%s.go", safeName)
+	filename := fmt.Sprintf("command/migration/packImport/%s.go", safeName)
 
-	if err := os.MkdirAll("migration/list", os.ModePerm); err != nil {
+	if err := os.MkdirAll("command/migration/list", os.ModePerm); err != nil {
 		panic(fmt.Errorf("❌ cannot create migration: %w", err))
 	}
 
@@ -439,7 +439,7 @@ func MappingDownFuncMigration() map[string]func(*gorm.DB) error {
 
 	migrationPath := ""
 	if len(migrationFiles) != 0 {
-		migrationPath = fmt.Sprintf(`"%s"`, "github.com/jaayroots/habit-tracker-api/migration/list")
+		migrationPath = fmt.Sprintf(`"%s"`, "github.com/jaayroots/habit-tracker-api/command/migration/list")
 	}
 	MigrationPathBuilder.WriteString(migrationPath)
 

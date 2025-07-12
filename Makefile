@@ -3,4 +3,4 @@ APP_NAME := habit-tracker-api
 
 # Commands
 migrations:
-	go run ./migration/migrations.go
+	go run ./command/migration/migrations.go
