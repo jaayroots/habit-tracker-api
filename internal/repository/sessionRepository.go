@@ -1,0 +1,79 @@
+package repository
+
+import (
+	"errors"
+
+	"github.com/google/uuid"
+	databases "github.com/jaayroots/habit-tracker-api/database"
+	"github.com/jaayroots/habit-tracker-api/entities"
+	"github.com/labstack/echo/v4"
+	"gorm.io/gorm"
+
+	_authException "github.com/jaayroots/habit-tracker-api/exception/auth"
+)
+
+type sessionRepositoryImpl struct {
+	db     databases.Database
+	logger echo.Logger
+}
+
+func NewSessionRepositoryImpl(db databases.Database, logger echo.Logger) SessionRepository {
+	return &sessionRepositoryImpl{
+		db:     db,
+		logger: logger,
+	}
+}
+
+type SessionRepository interface {
+	Create(tx *gorm.DB, session *entities.Session) error
+	Delete(tx *gorm.DB, userID uuid.UUID) error
+	FindByToken(token string) (*entities.Session, error)
+}
+
+// func (r *sessionRepositoryImpl) Create(session *entities.Session) (*entities.Session, error) {
+
+// 	err := r.db.Connect().
+// 		Create(session).Error
+
+//		if err != nil {
+//			return nil, _authException.CannotCreateSession()
+//		}
+//		return session, nil
+//	}
+func (r *sessionRepositoryImpl) Create(tx *gorm.DB, session *entities.Session) error {
+	err := tx.Create(session).Error
+	if err != nil {
+		return _authException.CannotCreateSession()
+	}
+	return err
+}
+
+func (r *sessionRepositoryImpl) Delete(tx *gorm.DB, userID uuid.UUID) error {
+
+	err := tx.Delete(&entities.Session{}, "user_id = ?", userID).Error
+
+	if err != nil {
+		return _authException.CannotCreateSession()
+	}
+
+	return nil
+}
+
+func (r *sessionRepositoryImpl) FindByToken(token string) (*entities.Session, error) {
+
+	session := new(entities.Session)
+
+	err := r.db.Connect().
+		Where("token = ?", token).
+		First(session).Error
+
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		return nil, nil
+	}
+
+	if err != nil {
+		return nil, err
+	}
+
+	return session, nil
+}
