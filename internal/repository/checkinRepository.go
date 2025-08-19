@@ -8,7 +8,9 @@ import (
 	"github.com/labstack/echo/v4"
 	"gorm.io/gorm"
 
-	_checkinException "github.com/jaayroots/habit-tracker-api/exception/checkin"
+	
+	_exceptionType "github.com/jaayroots/habit-tracker-api/enums/exception"
+	_exception "github.com/jaayroots/habit-tracker-api/exception"
 	_checkinModel "github.com/jaayroots/habit-tracker-api/model/checkin"
 	"github.com/jaayroots/habit-tracker-api/utils"
 )
@@ -45,7 +47,7 @@ func (r *checkinRepositoryImpl) Create(pctx echo.Context, checkin *entities.Chec
 		Error
 
 	if err != nil {
-		return nil, _checkinException.CannotCreateCheckin()
+		return nil, _exception.Handle("cannot create checkin", _exceptionType.Info)
 	}
 	return checkin, nil
 }
@@ -86,7 +88,7 @@ func (r *checkinRepositoryImpl) Delete(pctx echo.Context, checkinID uint) (*enti
 		Delete(checkinEntity).Error
 
 	if err != nil {
-		return nil, _checkinException.CannotDeleteCheckin()
+		return nil, _exception.Handle("cannot delete checkin", _exceptionType.Info)
 	}
 
 	return checkinEntity, nil
@@ -104,7 +106,7 @@ func (r *checkinRepositoryImpl) FindByID(pctx echo.Context, checkinID uint) (*en
 
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil, _checkinException.NotFoundCheckin()
+			return nil, _exception.Handle("not found checkin", _exceptionType.Info)
 		}
 		return nil, err
 	}

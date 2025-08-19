@@ -9,7 +9,8 @@ import (
 	"github.com/labstack/echo/v4"
 	"gorm.io/gorm"
 
-	_authException "github.com/jaayroots/habit-tracker-api/exception/auth"
+	_exceptionType "github.com/jaayroots/habit-tracker-api/enums/exception"
+	_exception "github.com/jaayroots/habit-tracker-api/exception"
 )
 
 type sessionRepositoryImpl struct {
@@ -43,7 +44,7 @@ type SessionRepository interface {
 func (r *sessionRepositoryImpl) Create(tx *gorm.DB, session *entities.Session) error {
 	err := tx.Create(session).Error
 	if err != nil {
-		return _authException.CannotCreateSession()
+		return _exception.Handle("cannot create session", _exceptionType.Info)
 	}
 	return err
 }
@@ -53,7 +54,7 @@ func (r *sessionRepositoryImpl) Delete(tx *gorm.DB, userID uuid.UUID) error {
 	err := tx.Delete(&entities.Session{}, "user_id = ?", userID).Error
 
 	if err != nil {
-		return _authException.CannotCreateSession()
+		return _exception.Handle("cannot create session", _exceptionType.Info)
 	}
 
 	return nil

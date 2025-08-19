@@ -9,7 +9,8 @@ import (
 	"github.com/labstack/echo/v4"
 	"gorm.io/gorm"
 
-	_userContactException "github.com/jaayroots/habit-tracker-api/exception/userContact"
+	_exceptionType "github.com/jaayroots/habit-tracker-api/enums/exception"
+	_exception "github.com/jaayroots/habit-tracker-api/exception"
 )
 
 type userContactRepositoryImpl struct {
@@ -90,7 +91,7 @@ func (r *userContactRepositoryImpl) Create(tx *gorm.DB, userContact []entities.U
 
 	err := tx.Create(userContact).Error
 	if err != nil {
-		return _userContactException.CannotCreateUserContact()
+		return _exception.Handle("cannot create user contact", _exceptionType.Info)
 	}
 	return nil
 }

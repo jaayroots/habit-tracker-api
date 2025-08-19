@@ -8,7 +8,8 @@ import (
 	"github.com/jaayroots/habit-tracker-api/utils"
 	"github.com/labstack/echo/v4"
 
-	_userException "github.com/jaayroots/habit-tracker-api/exception/user"
+	_exceptionType "github.com/jaayroots/habit-tracker-api/enums/exception"
+	_exception "github.com/jaayroots/habit-tracker-api/exception"
 	_userModel "github.com/jaayroots/habit-tracker-api/model/user"
 )
 
@@ -48,7 +49,7 @@ func (s *habitServiceImpl) Create(pctx echo.Context, habitReq *_habitModel.Habit
 	val := pctx.Get("user")
 	user, ok := val.(*_userModel.UserRes)
 	if !ok {
-		return nil, _userException.NotFoundUser()
+		return nil, _exception.Handle("not found user", _exceptionType.Info)
 	}
 
 	habitEntity.UserID = user.ID

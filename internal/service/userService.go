@@ -5,7 +5,8 @@ import (
 	"gorm.io/gorm"
 
 	databases "github.com/jaayroots/habit-tracker-api/database"
-	_userException "github.com/jaayroots/habit-tracker-api/exception/user"
+	_exceptionType "github.com/jaayroots/habit-tracker-api/enums/exception"
+	_exception "github.com/jaayroots/habit-tracker-api/exception"
 	_userMapper "github.com/jaayroots/habit-tracker-api/mapper/user"
 	_userContact "github.com/jaayroots/habit-tracker-api/mapper/userContact"
 	_userContactMapper "github.com/jaayroots/habit-tracker-api/mapper/userContact"
@@ -43,7 +44,7 @@ func (s *userServiceImpl) FindByID(userID uuid.UUID) (*_userModel.UserRes, error
 		return nil, err
 	}
 	if user == nil {
-		return nil, _userException.NotFoundUser()
+		return nil, _exception.Handle("not found user", _exceptionType.Info)
 	}
 
 	userContact, err := s.userContactRepository.FindByUserID(userID)
@@ -64,7 +65,7 @@ func (s *userServiceImpl) Update(userID uuid.UUID, userUpdateReq *_userModel.Use
 	}
 
 	if user == nil {
-		return _userException.NotFoundUser()
+		return _exception.Handle("not found user", _exceptionType.Info)
 	}
 
 	userContactCreateEntity, _, err := _userContactMapper.ToUserContactCreateEntity(user.ID, userUpdateReq.UserContact)
@@ -116,7 +117,7 @@ func (s *userServiceImpl) Delete(userID uuid.UUID) error {
 		return err
 	}
 	if user == nil {
-		return _userException.NotFoundUser()
+		return _exception.Handle("not found user", _exceptionType.Info)
 	}
 
 	err = s.db.Connect().Transaction(func(tx *gorm.DB) error {

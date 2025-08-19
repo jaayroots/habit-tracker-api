@@ -6,8 +6,8 @@ import (
 	"github.com/jaayroots/habit-tracker-api/utils"
 	"github.com/labstack/echo/v4"
 
-	_habitException "github.com/jaayroots/habit-tracker-api/exception/habit"
-	_userException "github.com/jaayroots/habit-tracker-api/exception/user"
+	_exceptionType "github.com/jaayroots/habit-tracker-api/enums/exception"
+	_exception "github.com/jaayroots/habit-tracker-api/exception"
 	_checkinMapper "github.com/jaayroots/habit-tracker-api/mapper/checkin"
 	_checkinModel "github.com/jaayroots/habit-tracker-api/model/checkin"
 	_userModel "github.com/jaayroots/habit-tracker-api/model/user"
@@ -43,7 +43,7 @@ func (s *checkinServiceImpl) Create(pctx echo.Context, checkinReq *_checkinModel
 	val := pctx.Get("user")
 	user, ok := val.(*_userModel.UserRes)
 	if !ok {
-		return nil, _userException.NotFoundUser()
+		return nil, _exception.Handle("not found user", _exceptionType.Info)
 	}
 
 	checkinEntity, err := _checkinMapper.ToCheckinEntity(pctx, checkinReq, 0)
@@ -57,7 +57,7 @@ func (s *checkinServiceImpl) Create(pctx echo.Context, checkinReq *_checkinModel
 	}
 
 	if habit == nil {
-		return nil, _habitException.NotFoundHabit()
+		return nil, _exception.Handle("not found checkin", _exceptionType.Info)
 	}
 
 	checkinEntity, err = s.checkinRepository.Create(pctx, checkinEntity)

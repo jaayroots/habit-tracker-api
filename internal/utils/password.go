@@ -7,7 +7,8 @@ import (
 	"golang.org/x/crypto/bcrypt"
 
 	"github.com/jaayroots/habit-tracker-api/config"
-	_authException "github.com/jaayroots/habit-tracker-api/exception/auth"
+	_exceptionType "github.com/jaayroots/habit-tracker-api/enums/exception"
+	_exception "github.com/jaayroots/habit-tracker-api/exception"
 )
 
 func CheckPasswordHash(password, hash string) bool {
@@ -37,7 +38,7 @@ func HashToken(info interface{}, exp int) (string, time.Time, error) {
 
 	tokenString, err := token.SignedString([]byte(secret))
 	if err != nil {
-		return "", time.Now(), _authException.TokenInvalid()
+		return "", time.Now(), _exception.Handle("token invalid", _exceptionType.Info)
 	}
 
 	return tokenString, expDate, err

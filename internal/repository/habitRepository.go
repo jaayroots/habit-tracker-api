@@ -6,12 +6,12 @@ import (
 	"github.com/google/uuid"
 	databases "github.com/jaayroots/habit-tracker-api/database"
 	"github.com/jaayroots/habit-tracker-api/entities"
-	"github.com/labstack/echo/v4"
-	"gorm.io/gorm"
-
-	_habitException "github.com/jaayroots/habit-tracker-api/exception/habit"
+	_exceptionType "github.com/jaayroots/habit-tracker-api/enums/exception"
+	_exception "github.com/jaayroots/habit-tracker-api/exception"
 	_habitModel "github.com/jaayroots/habit-tracker-api/model/habit"
 	"github.com/jaayroots/habit-tracker-api/utils"
+	"github.com/labstack/echo/v4"
+	"gorm.io/gorm"
 )
 
 type habitRepositoryImpl struct {
@@ -52,7 +52,7 @@ func (r *habitRepositoryImpl) Create(pctx echo.Context, habit *entities.Habit) (
 		Error
 
 	if err != nil {
-		return nil, _habitException.CannotCreateHabit()
+		return nil, _exception.Handle("cannot create habbit", _exceptionType.Info)
 	}
 	return habit, nil
 }
@@ -69,7 +69,7 @@ func (r *habitRepositoryImpl) FindByID(pctx echo.Context, habitID uint) (*entiti
 
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil, _habitException.NotFoundHabit()
+			return nil, _exception.Handle("not found habbit", _exceptionType.Info)
 		}
 		return nil, err
 	}
@@ -90,7 +90,7 @@ func (r *habitRepositoryImpl) Update(pctx echo.Context, habit *entities.Habit) (
 		Scan(habitEntity).
 		Error
 	if err != nil {
-		return nil, _habitException.CannotUpdateHabit()
+		return nil, _exception.Handle("cannot update habbit", _exceptionType.Info)
 	}
 
 	return habitEntity, nil
@@ -109,7 +109,7 @@ func (r *habitRepositoryImpl) Delete(pctx echo.Context, habitID uint) (*entities
 		Delete(habitEntity).Error
 
 	if err != nil {
-		return nil, _habitException.CannotDeleteHabit()
+		return nil, _exception.Handle("cannot delete habbit", _exceptionType.Info)
 	}
 
 	return habitEntity, nil
@@ -206,7 +206,7 @@ func (r *habitRepositoryImpl) FindByIDAndUserID(pctx echo.Context, habitID uint,
 
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
-			return nil, _habitException.NotFoundHabit()
+			return nil, _exception.Handle("not found habbit", _exceptionType.Info)
 		}
 		return nil, err
 	}

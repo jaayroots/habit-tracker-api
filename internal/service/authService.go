@@ -9,8 +9,8 @@ import (
 	"github.com/jaayroots/habit-tracker-api/utils"
 	"gorm.io/gorm"
 
-	_authException "github.com/jaayroots/habit-tracker-api/exception/auth"
-	_userException "github.com/jaayroots/habit-tracker-api/exception/user"
+	_exceptionType "github.com/jaayroots/habit-tracker-api/enums/exception"
+	_exception "github.com/jaayroots/habit-tracker-api/exception"
 	_authMapper "github.com/jaayroots/habit-tracker-api/mapper/auth"
 	_userMapper "github.com/jaayroots/habit-tracker-api/mapper/user"
 	_userContactMapper "github.com/jaayroots/habit-tracker-api/mapper/userContact"
@@ -65,7 +65,7 @@ func (s *authServiceImpl) Register(userReq *_userModel.UserReq) (*_userModel.Use
 		return nil, err
 	}
 	if user != nil {
-		return nil, _userException.IsExistEmail()
+		return nil, _exception.Handle("email is already", _exceptionType.Info)
 	}
 
 	err = s.db.Connect().Transaction(func(tx *gorm.DB) error {
@@ -99,12 +99,12 @@ func (s *authServiceImpl) Login(loginReq *_authModel.LoginReq) (*_authModel.Logi
 	}
 
 	if user == nil {
-		return nil, _userException.NotFoundUser()
+		return nil, _exception.Handle("not found user", _exceptionType.Info)
 	}
 
 	isValid := utils.CheckPasswordHash(loginReq.Password, user.Password)
 	if !isValid {
-		return nil, _authException.AuthenticationFailed()
+		return nil, _exception.Handle("authentication failed", _exceptionType.Info)
 	}
 
 	expToken := config.ConfigGetting().Security.ExpiredToken
@@ -146,7 +146,7 @@ func (s *authServiceImpl) Logout(userID uuid.UUID) error {
 	}
 
 	if user == nil {
-		return _userException.NotFoundUser()
+		return _exception.Handle("not found user", _exceptionType.Info)
 	}
 
 	err = s.db.Connect().Transaction(func(tx *gorm.DB) error {
@@ -172,11 +172,11 @@ func (s *authServiceImpl) Authorizing(token string) (*_authModel.LoginRes, bool,
 		return nil, isTokenExpSoon, err
 	}
 	if session == nil {
-		return nil, isTokenExpSoon, _authException.TokenInvalid()
+		return nil, isTokenExpSoon, _exception.Handle("token invalid", _exceptionType.Info)
 	}
 
 	if time.Now().After(session.ExpiresAt) {
-		return nil, isTokenExpSoon, _authException.TokenInvalid()
+		return nil, isTokenExpSoon, _exception.Handle("token invalid", _exceptionType.Info)
 	}
 
 	user, err := s.userRepository.FindByID(session.UserID)
@@ -184,7 +184,7 @@ func (s *authServiceImpl) Authorizing(token string) (*_authModel.LoginRes, bool,
 		return nil, isTokenExpSoon, err
 	}
 	if user == nil {
-		return nil, isTokenExpSoon, _authException.TokenInvalid()
+		return nil, isTokenExpSoon, _exception.Handle("token invalid", _exceptionType.Info)
 	}
 
 	refreshTokenBefore := config.ConfigGetting().Security.RefreshToken
@@ -203,7 +203,7 @@ func (s *authServiceImpl) Refreash(ipAddress string, userID uuid.UUID) (*_authMo
 	}
 
 	if user == nil {
-		return nil, _userException.NotFoundUser()
+		return nil, _exception.Handle("not found user", _exceptionType.Info)
 	}
 
 	err = s.Logout(user.ID)

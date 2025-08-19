@@ -9,7 +9,8 @@ import (
 	"github.com/labstack/echo/v4"
 	"gorm.io/gorm"
 
-	_userException "github.com/jaayroots/habit-tracker-api/exception/user"
+	_exceptionType "github.com/jaayroots/habit-tracker-api/enums/exception"
+	_exception "github.com/jaayroots/habit-tracker-api/exception"
 )
 
 type userRepositoryImpl struct {
@@ -36,7 +37,7 @@ type UserRepository interface {
 func (r *userRepositoryImpl) Create(tx *gorm.DB, user *entities.User) error {
 	err := tx.Create(user).Error
 	if err != nil {
-		return _userException.CannotCreateUser()
+		return _exception.Handle("cannot create user", _exceptionType.Info)
 	}
 	return err
 }
@@ -105,7 +106,7 @@ func (r *userRepositoryImpl) Update(tx *gorm.DB, updateData *entities.User) erro
 		Where("id = ?", updateData.ID).
 		Updates(updateData).Error
 	if err != nil {
-		return _userException.CannotUpdateUser()
+		return _exception.Handle("cannot update user", _exceptionType.Info)
 	}
 	return nil
 }
@@ -117,7 +118,7 @@ func (r *userRepositoryImpl) Delete(tx *gorm.DB, userID uuid.UUID) error {
 		Where("id = ?", userID).
 		Update("is_deleted", true).Error
 	if err != nil {
-		return _userException.CannotDeleteUser()
+		return _exception.Handle("cannot delete user", _exceptionType.Info)
 	}
 
 	return nil

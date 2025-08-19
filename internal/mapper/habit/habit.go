@@ -3,8 +3,9 @@ package mapper
 import (
 	"github.com/jaayroots/habit-tracker-api/entities"
 	"github.com/jaayroots/habit-tracker-api/enums"
+	_exceptionType "github.com/jaayroots/habit-tracker-api/enums/exception"
+	_exception "github.com/jaayroots/habit-tracker-api/exception"
 	_checkinModel "github.com/jaayroots/habit-tracker-api/model/checkin"
-	_habitException "github.com/jaayroots/habit-tracker-api/exception/habit"
 	_habitModel "github.com/jaayroots/habit-tracker-api/model/habit"
 	"github.com/jaayroots/habit-tracker-api/utils"
 
@@ -15,7 +16,7 @@ func ToHabitEntity(pctx echo.Context, habitReq *_habitModel.HabitReq, habitID ui
 
 	frequency := enums.Frequency(habitReq.Frequency)
 	if !enums.IsValidFrequency(int(frequency)) {
-		return nil, _habitException.FrequencyInvalid()
+		return nil, _exception.Handle("frequency invalid", _exceptionType.Info)
 	}
 
 	habitEntity := &entities.Habit{
