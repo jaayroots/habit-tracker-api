@@ -28,7 +28,8 @@ go.work
 /app
 config.yaml
 /config/config.yaml
-/.tmp
+/.tmp*
+/internal/tmp*
 /tmp/main
 /.air.toml
 go.sum
