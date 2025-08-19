@@ -4,14 +4,14 @@ import (
 	"github.com/google/uuid"
 	"gorm.io/gorm"
 
-	databases "github.com/jaayroots/habit-tracker-api/database"
-	_exceptionType "github.com/jaayroots/habit-tracker-api/enums/exception"
-	_exception "github.com/jaayroots/habit-tracker-api/exception"
-	_userMapper "github.com/jaayroots/habit-tracker-api/mapper/user"
-	_userContact "github.com/jaayroots/habit-tracker-api/mapper/userContact"
-	_userContactMapper "github.com/jaayroots/habit-tracker-api/mapper/userContact"
-	_userModel "github.com/jaayroots/habit-tracker-api/model/user"
-	_repository "github.com/jaayroots/habit-tracker-api/repository"
+	databases "github.com/habit-tracker-api/database"
+	_exceptionType "github.com/habit-tracker-api/enums/exception"
+	_exception "github.com/habit-tracker-api/exception"
+	_userMapper "github.com/habit-tracker-api/mapper/user"
+	_userContact "github.com/habit-tracker-api/mapper/userContact"
+	_userContactMapper "github.com/habit-tracker-api/mapper/userContact"
+	_userModel "github.com/habit-tracker-api/model/user"
+	_repository "github.com/habit-tracker-api/repository"
 )
 
 type userServiceImpl struct {

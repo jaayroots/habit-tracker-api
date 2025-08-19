@@ -4,12 +4,12 @@ import (
 	"errors"
 
 	"github.com/google/uuid"
-	databases "github.com/jaayroots/habit-tracker-api/database"
-	"github.com/jaayroots/habit-tracker-api/entities"
-	_exceptionType "github.com/jaayroots/habit-tracker-api/enums/exception"
-	_exception "github.com/jaayroots/habit-tracker-api/exception"
-	_habitModel "github.com/jaayroots/habit-tracker-api/model/habit"
-	"github.com/jaayroots/habit-tracker-api/utils"
+	databases "github.com/habit-tracker-api/database"
+	"github.com/habit-tracker-api/entities"
+	_exceptionType "github.com/habit-tracker-api/enums/exception"
+	_exception "github.com/habit-tracker-api/exception"
+	_habitModel "github.com/habit-tracker-api/model/habit"
+	"github.com/habit-tracker-api/utils"
 	"github.com/labstack/echo/v4"
 	"gorm.io/gorm"
 )

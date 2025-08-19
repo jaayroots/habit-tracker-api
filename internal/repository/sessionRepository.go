@@ -4,13 +4,13 @@ import (
 	"errors"
 
 	"github.com/google/uuid"
-	databases "github.com/jaayroots/habit-tracker-api/database"
-	"github.com/jaayroots/habit-tracker-api/entities"
+	databases "github.com/habit-tracker-api/database"
+	"github.com/habit-tracker-api/entities"
 	"github.com/labstack/echo/v4"
 	"gorm.io/gorm"
 
-	_exceptionType "github.com/jaayroots/habit-tracker-api/enums/exception"
-	_exception "github.com/jaayroots/habit-tracker-api/exception"
+	_exceptionType "github.com/habit-tracker-api/enums/exception"
+	_exception "github.com/habit-tracker-api/exception"
 )
 
 type sessionRepositoryImpl struct {

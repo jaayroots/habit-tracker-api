@@ -1,7 +1,7 @@
 package migration
 
 import (
-	"github.com/jaayroots/habit-tracker-api/entities"
+	"github.com/habit-tracker-api/entities"
 	"gorm.io/gorm"
 )
 

@@ -1,7 +1,7 @@
 package server
 
 import (
-	_controller "github.com/jaayroots/habit-tracker-api/controller"
+	_controller "github.com/habit-tracker-api/controller"
 	"github.com/labstack/echo/v4"
 )
 

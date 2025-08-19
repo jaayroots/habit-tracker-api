@@ -2,11 +2,11 @@ package mapper
 
 import (
 	"github.com/google/uuid"
-	"github.com/jaayroots/habit-tracker-api/entities"
-	"github.com/jaayroots/habit-tracker-api/utils"
+	"github.com/habit-tracker-api/entities"
+	"github.com/habit-tracker-api/utils"
 
-	_userModel "github.com/jaayroots/habit-tracker-api/model/user"
-	_userContactModel "github.com/jaayroots/habit-tracker-api/model/userContact"
+	_userModel "github.com/habit-tracker-api/model/user"
+	_userContactModel "github.com/habit-tracker-api/model/userContact"
 )
 
 func ToUserEntity(userReq *_userModel.UserReq) (*entities.User, error) {

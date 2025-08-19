@@ -1,9 +1,9 @@
 package mapper
 
 import (
-	"github.com/jaayroots/habit-tracker-api/entities"
-	_checkinModel "github.com/jaayroots/habit-tracker-api/model/checkin"
-	"github.com/jaayroots/habit-tracker-api/utils"
+	"github.com/habit-tracker-api/entities"
+	_checkinModel "github.com/habit-tracker-api/model/checkin"
+	"github.com/habit-tracker-api/utils"
 
 	"github.com/labstack/echo/v4"
 )

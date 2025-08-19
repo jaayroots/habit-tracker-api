@@ -1,13 +1,13 @@
 package mapper
 
 import (
-	"github.com/jaayroots/habit-tracker-api/entities"
-	"github.com/jaayroots/habit-tracker-api/enums"
-	_exceptionType "github.com/jaayroots/habit-tracker-api/enums/exception"
-	_exception "github.com/jaayroots/habit-tracker-api/exception"
-	_checkinModel "github.com/jaayroots/habit-tracker-api/model/checkin"
-	_habitModel "github.com/jaayroots/habit-tracker-api/model/habit"
-	"github.com/jaayroots/habit-tracker-api/utils"
+	"github.com/habit-tracker-api/entities"
+	"github.com/habit-tracker-api/enums"
+	_exceptionType "github.com/habit-tracker-api/enums/exception"
+	_exception "github.com/habit-tracker-api/exception"
+	_checkinModel "github.com/habit-tracker-api/model/checkin"
+	_habitModel "github.com/habit-tracker-api/model/habit"
+	"github.com/habit-tracker-api/utils"
 
 	"github.com/labstack/echo/v4"
 )

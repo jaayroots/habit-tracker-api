@@ -1,16 +1,16 @@
 package service
 
 import (
-	"github.com/jaayroots/habit-tracker-api/entities"
-	_repository "github.com/jaayroots/habit-tracker-api/repository"
-	"github.com/jaayroots/habit-tracker-api/utils"
+	"github.com/habit-tracker-api/entities"
+	_repository "github.com/habit-tracker-api/repository"
+	"github.com/habit-tracker-api/utils"
 	"github.com/labstack/echo/v4"
 
-	_exceptionType "github.com/jaayroots/habit-tracker-api/enums/exception"
-	_exception "github.com/jaayroots/habit-tracker-api/exception"
-	_checkinMapper "github.com/jaayroots/habit-tracker-api/mapper/checkin"
-	_checkinModel "github.com/jaayroots/habit-tracker-api/model/checkin"
-	_userModel "github.com/jaayroots/habit-tracker-api/model/user"
+	_exceptionType "github.com/habit-tracker-api/enums/exception"
+	_exception "github.com/habit-tracker-api/exception"
+	_checkinMapper "github.com/habit-tracker-api/mapper/checkin"
+	_checkinModel "github.com/habit-tracker-api/model/checkin"
+	_userModel "github.com/habit-tracker-api/model/user"
 )
 
 type checkinServiceImpl struct {

@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/jaayroots/habit-tracker-api/model/userContact"
+	model "github.com/habit-tracker-api/model/userContact"
 )
 
 type (

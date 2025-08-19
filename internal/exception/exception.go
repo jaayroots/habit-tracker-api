@@ -2,7 +2,8 @@ package exception
 
 import (
 	"errors"
-	_exceptionType "github.com/jaayroots/habit-tracker-api/enums/exception"
+
+	_exceptionType "github.com/habit-tracker-api/enums/exception"
 )
 
 type Exception struct{}

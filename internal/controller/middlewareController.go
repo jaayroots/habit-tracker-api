@@ -5,13 +5,13 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/jaayroots/habit-tracker-api/custom"
-	"github.com/jaayroots/habit-tracker-api/pctxkeys"
-	"github.com/jaayroots/habit-tracker-api/utils"
+	"github.com/habit-tracker-api/custom"
+	"github.com/habit-tracker-api/pctxkeys"
+	"github.com/habit-tracker-api/utils"
 
 	"github.com/labstack/echo/v4"
 
-	_service "github.com/jaayroots/habit-tracker-api/service"
+	_service "github.com/habit-tracker-api/service"
 )
 
 type middlewareContollerImpl struct {

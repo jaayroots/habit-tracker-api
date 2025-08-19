@@ -1,9 +1,9 @@
 package server
 
 import (
-	_controller "github.com/jaayroots/habit-tracker-api/controller"
-	_service "github.com/jaayroots/habit-tracker-api/service"
-	_repository "github.com/jaayroots/habit-tracker-api/repository"
+	_controller "github.com/habit-tracker-api/controller"
+	_repository "github.com/habit-tracker-api/repository"
+	_service "github.com/habit-tracker-api/service"
 )
 
 func (s *echoServer) checkinRouter(m *authorizingMiddleware) {

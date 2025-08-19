@@ -5,7 +5,7 @@ import (
 	"log"
 	"sync"
 
-	"github.com/jaayroots/habit-tracker-api/config"
+	"github.com/habit-tracker-api/config"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

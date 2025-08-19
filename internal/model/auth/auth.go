@@ -1,7 +1,7 @@
 package model
 
 import (
-	_userModel "github.com/jaayroots/habit-tracker-api/model/user"
+	_userModel "github.com/habit-tracker-api/model/user"
 )
 
 type (

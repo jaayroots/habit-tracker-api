@@ -1,4 +1,4 @@
-module github.com/jaayroots/habit-tracker-api
+module github.com/habit-tracker-api
 
 go 1.24.2
 

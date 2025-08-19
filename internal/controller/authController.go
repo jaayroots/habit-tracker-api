@@ -3,13 +3,13 @@ package controller
 import (
 	"net/http"
 
-	"github.com/jaayroots/habit-tracker-api/custom"
+	"github.com/habit-tracker-api/custom"
 
 	"github.com/labstack/echo/v4"
 
-	_authModel "github.com/jaayroots/habit-tracker-api/model/auth"
-	_userModel "github.com/jaayroots/habit-tracker-api/model/user"
-	_service "github.com/jaayroots/habit-tracker-api/service"
+	_authModel "github.com/habit-tracker-api/model/auth"
+	_userModel "github.com/habit-tracker-api/model/user"
+	_service "github.com/habit-tracker-api/service"
 )
 
 type authContollerImpl struct {

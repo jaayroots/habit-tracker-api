@@ -3,12 +3,12 @@ package controller
 import (
 	"net/http"
 
-	"github.com/jaayroots/habit-tracker-api/custom"
-	_service "github.com/jaayroots/habit-tracker-api/service"
-	"github.com/jaayroots/habit-tracker-api/utils"
+	"github.com/habit-tracker-api/custom"
+	_service "github.com/habit-tracker-api/service"
+	"github.com/habit-tracker-api/utils"
 	"github.com/labstack/echo/v4"
 
-	_checkinModel "github.com/jaayroots/habit-tracker-api/model/checkin"
+	_checkinModel "github.com/habit-tracker-api/model/checkin"
 )
 
 type checkinContollerImpl struct {

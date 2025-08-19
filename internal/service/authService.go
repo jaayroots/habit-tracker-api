@@ -4,19 +4,19 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/jaayroots/habit-tracker-api/config"
-	databases "github.com/jaayroots/habit-tracker-api/database"
-	"github.com/jaayroots/habit-tracker-api/utils"
+	"github.com/habit-tracker-api/config"
+	databases "github.com/habit-tracker-api/database"
+	"github.com/habit-tracker-api/utils"
 	"gorm.io/gorm"
 
-	_exceptionType "github.com/jaayroots/habit-tracker-api/enums/exception"
-	_exception "github.com/jaayroots/habit-tracker-api/exception"
-	_authMapper "github.com/jaayroots/habit-tracker-api/mapper/auth"
-	_userMapper "github.com/jaayroots/habit-tracker-api/mapper/user"
-	_userContactMapper "github.com/jaayroots/habit-tracker-api/mapper/userContact"
-	_authModel "github.com/jaayroots/habit-tracker-api/model/auth"
-	_userModel "github.com/jaayroots/habit-tracker-api/model/user"
-	_repository "github.com/jaayroots/habit-tracker-api/repository"
+	_exceptionType "github.com/habit-tracker-api/enums/exception"
+	_exception "github.com/habit-tracker-api/exception"
+	_authMapper "github.com/habit-tracker-api/mapper/auth"
+	_userMapper "github.com/habit-tracker-api/mapper/user"
+	_userContactMapper "github.com/habit-tracker-api/mapper/userContact"
+	_authModel "github.com/habit-tracker-api/model/auth"
+	_userModel "github.com/habit-tracker-api/model/user"
+	_repository "github.com/habit-tracker-api/repository"
 )
 
 type authServiceImpl struct {

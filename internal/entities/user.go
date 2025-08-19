@@ -4,7 +4,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/jaayroots/habit-tracker-api/enums"
+	"github.com/habit-tracker-api/enums"
 )
 
 type User struct {

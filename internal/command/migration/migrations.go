@@ -13,11 +13,11 @@ import (
 	"gorm.io/gorm"
 
 	"github.com/google/uuid"
-	"github.com/jaayroots/habit-tracker-api/config"
-	"github.com/jaayroots/habit-tracker-api/database"
-	"github.com/jaayroots/habit-tracker-api/entities"
+	"github.com/habit-tracker-api/config"
+	"github.com/habit-tracker-api/database"
+	"github.com/habit-tracker-api/entities"
 
-	"github.com/jaayroots/habit-tracker-api/command/migration/packImport"
+	"github.com/habit-tracker-api/command/migration/packImport"
 	"github.com/jedib0t/go-pretty/v6/table"
 )
 
@@ -439,7 +439,7 @@ func MappingDownFuncMigration() map[string]func(*gorm.DB) error {
 
 	migrationPath := ""
 	if len(migrationFiles) != 0 {
-		migrationPath = fmt.Sprintf(`"%s"`, "github.com/jaayroots/habit-tracker-api/command/migration/list")
+		migrationPath = fmt.Sprintf(`"%s"`, "github.com/habit-tracker-api/command/migration/list")
 	}
 	MigrationPathBuilder.WriteString(migrationPath)
 
